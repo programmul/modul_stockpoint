@@ -174,7 +174,7 @@ class Mamoku_Multistockpoint_Model_Customer extends Mage_Core_Model_Abstract
  		$customer->loadByEmail($login);
 
  		
- 		if((bool)$customer->getIs_verified()){
+ 		/*if((bool)$customer->getIs_verified()){
         	$customer->setConfirmation(null);
         	$customer->save();
     	}else{
@@ -182,7 +182,7 @@ class Mamoku_Multistockpoint_Model_Customer extends Mage_Core_Model_Abstract
         	$customer->save();
 
     	}
-        if ($this->getConfirmation() && $this->isConfirmationRequired()) {
+*/        if ($this->getConfirmation() && $this->isConfirmationRequired()) {
             throw Mage::exception('Mage_Core', Mage::helper('customer')->__('Maaf saat ini akun anda blm terverifikasi, silahkan hubungi layanan pelanggan untuk informasi lebih lanjut.'),
                 self::EXCEPTION_EMAIL_NOT_CONFIRMED
             );
