@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <multistockpoint_adminhtml_outlet_index>
+  <reference name="content">
+    <block type="multistockpoint/adminhtml_outlet" name="outlet" />
+  </reference>
+  </multistockpoint_adminhtml_outlet_index>
+	<multistockpoint_adminhtml_locationcoverage_index>
+	<reference name="content">
+	  <block type="multistockpoint/adminhtml_locationcoverage" name="locationcoverage" />
+	</reference>
+  </multistockpoint_adminhtml_locationcoverage_index>
+  <multistockpoint_adminhtml_pricetype_index>
+	<reference name="content">
+	  <block type="multistockpoint/adminhtml_pricetype" name="pricetype" />
+	</reference>
+  </multistockpoint_adminhtml_pricetype_index>
+	<adminhtml_catalog_product_edit>
+        <reference name="product_tabs">
+            <action method="addTab">
+                <name>my_custom_tab</name>
+                <block>multistockpoint/adminhtml_catalog_product_tab</block>
+            </action>
+        </reference>
+    </adminhtml_catalog_product_edit>
+
+    <adminhtml_catalog_product_new>
+    <reference name="product_tabs">
+            <action method="addTab">
+                <name>my_custom_tab</name>
+                <block>multistockpoint/adminhtml_catalog_product_tab</block>
+            </action>
+        </reference>
+</adminhtml_catalog_product_new>
+
+  <multistockpoint_adminhtml_multistockpointbackend_index>
+	<reference name="content">
+	  <block type="multistockpoint/adminhtml_multistockpointbackend" name="multistockpointbackend" template="multistockpoint/multistockpointbackend.phtml"/>
+	</reference>
+  </multistockpoint_adminhtml_multistockpointbackend_index>
+  <multistockpoint_adminhtml_stockpoint_index>
+	<reference name="content">
+	  <block type="multistockpoint/adminhtml_stockpoint" name="stockpoint" />
+	</reference>
+  </multistockpoint_adminhtml_stockpoint_index>
+  
+</layout>

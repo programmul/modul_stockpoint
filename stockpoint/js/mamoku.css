@@ -1,0 +1,168 @@
+input[id*=bank_transfer_account]{
+  display: none !important;
+}
+
+@media screen and (max-width: 1400px) {
+  .modal-dialog{
+    z-index: 1000 !important;
+  }
+}
+.selectaddr{
+  width: 100px !important;
+}
+.border{
+  position: relative;
+  text-align: left;
+      border: 0px solid #333;
+    padding: 10px;
+    background: #eee;
+    min-height: 220px;
+    color: black;
+}
+.border td {
+    padding: 2px;
+}
+.selectaddr.button {
+    background: #DC4E4E;
+    color: #fff;
+    padding: 10px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -50px;
+}
+#checkout-step-billing{
+  display: none;
+}
+.btn {
+  background: #428bca;
+  border: #357ebd solid 1px;
+  border-radius: 3px;
+  color: #fff;
+  display: inline-block;
+  font-size: 14px;
+  padding: 8px 15px;
+  text-decoration: none;
+  text-align: center;
+  min-width: 60px;
+  position: relative;
+  transition: color .1s ease;
+  /* top: 40em;*/
+}
+.btn:hover {
+  background: #357ebd;
+}
+.btn.btn-big {
+  font-size: 18px;
+  padding: 15px 20px;
+  min-width: 100px;
+}
+.btn-close {
+  color: #aaaaaa;
+  font-size: 30px;
+  text-decoration: none;
+  position: absolute;
+  right: 5px;
+  top: 0;
+}
+.btn-close:hover {
+  color: #919191;
+}
+.modal:before {
+  content: "";
+  display: block;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.modal {
+    background-color: #fefefe;
+    position: fixed;
+    z-index: 1; 
+    padding-top: 130px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto;
+    display: table; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+
+ .modal-dialog {
+    background: #fefefe;
+    border: #333333 solid 1px;
+    position: relative;
+    margin: auto;
+    padding: 0;
+    width: 75%;
+    z-index: 11;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+
+.modal-body {
+  padding: 20px;
+  max-height: 700px;
+  overflow-y:auto;
+  background: #BBD4DC;
+}
+
+.border{
+    float: left;
+    min-width: 200px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    opacity: 1.80;
+    background: #fff;
+}
+.border button{
+
+}
+
+.border h3{
+  color: red;
+}
+
+.modal-header,
+.modal-footer {
+   background: #DC4E4E;
+  padding: 10px 20px;
+}
+.modal-header {
+  border-bottom: #eeeeee solid 1px;
+}
+.modal-header h2 {
+  font-size: 20px;
+  color: whitesmoke;
+}
+.modal-footer {
+  border-top: #eeeeee solid 1px;
+  text-align: right;
+}
+/*ADDED TO STOP SCROLLING TO TOP*/
+#close {
+  display: none;
+}

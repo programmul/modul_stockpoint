@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Mamoku_Multistockpoint>
+      <active>true</active>
+      <codePool>local</codePool>            
+	        <depends>
+                <Smartwave_Porto/>
+            </depends>
+      <version>0.1.0</version>
+    </Mamoku_Multistockpoint>
+  </modules>
+</config>

@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    Mamoku
+ * @package     Mamoku_PaymentConfirmation
+ * @copyright   Copyright (c) 2015 mamoku
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/**
+ * Installer to create table mamoku_payment_confirmation
+ *
+ * @author      mamoku <info@mamoku.com>
+ */
+ -->
+<config>
+    <menu>
+         <mamoku translate="title" module="mamoku">
+            <children>
+                <payment_confirmation translate="title" module="paymentconfirmation">
+                    <title>Payment Confirmation</title>
+                    <sort_order>20</sort_order>
+                    <children>
+                        <pending_confirmation translate="title">
+                            <title>Pending Confirmations</title>
+                            <sort_order>10</sort_order>
+                            <action>paymentconfirmation/adminhtml_confirmation/index</action>
+                        </pending_confirmation>
+                        <all_confirmation translate="title">
+                            <title>All Confirmations</title>
+                            <sort_order>20</sort_order>
+                            <action>paymentconfirmation/adminhtml_confirmation/all</action>
+                        </all_confirmation>
+                        <!--<csogroup translate="title">
+                            <title>CSO Member Group</title>
+                            <sort_order>10</sort_order>
+                            <children>
+                                <pending_confirmation translate="title">
+                                    <title>Pending Confirmations</title>
+                                    <sort_order>10</sort_order>
+                                    <action>paymentconfirmation/adminhtml_csoconfirmation/index</action>
+                                </pending_confirmation>
+                                <all_confirmation translate="title">
+                                    <title>All Confirmations</title>
+                                    <sort_order>20</sort_order>
+                                    <action>paymentconfirmation/adminhtml_csoconfirmation/all</action>
+                                </all_confirmation>
+                            </children>
+                        </csogroup>-->
+                        <!--<othergroup translate="title">
+                            <title>Other Member Group</title>
+                            <sort_order>20</sort_order>
+                            <children>
+                                <pending_confirmation translate="title">
+                                    <title>Pending Confirmations</title>
+                                    <sort_order>10</sort_order>
+                                    <action>paymentconfirmation/adminhtml_confirmation/index</action>
+                                </pending_confirmation>
+                                <all_confirmation translate="title">
+                                    <title>All Confirmations</title>
+                                    <sort_order>20</sort_order>
+                                    <action>paymentconfirmation/adminhtml_confirmation/all</action>
+                                </all_confirmation>
+                            </children>
+                        </othergroup>-->
+                    </children>
+                </payment_confirmation>
+            </children>
+         </mamoku>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <payment_confirmation translate="title" module="paymentconfirmation">
+                                        <title>Payment Confirmation</title>
+                                        <sort_order>630</sort_order>
+                                    </payment_confirmation>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <mamoku>
+                        <children>
+                            <payment_confirmation translate="title">
+                                <title>Payment Confirmations</title>
+                                <sort_order>20</sort_order>
+                                <children>
+                                    <csogroup translate="title">
+                                        <title>Menu CSO Member Group</title>
+                                        <sort_order>10</sort_order>
+                                        <children>
+                                            <pending_confirmation translate="title">
+                                                <title>Menu Pending Confirmations</title>
+                                                <sort_order>10</sort_order>
+                                            </pending_confirmation>
+                                            <all_confirmation translate="title">
+                                                <title>Menu All Confirmations</title>
+                                                <sort_order>20</sort_order>
+                                            </all_confirmation>
+                                        </children>
+                                    </csogroup>
+                                    <othergroup translate="title">
+                                        <title>Menu Other Member Group</title>
+                                        <sort_order>20</sort_order>
+                                        <children>
+                                            <pending_confirmation translate="title">
+                                                <title>Menu Pending Confirmations</title>
+                                                <sort_order>10</sort_order>
+                                            </pending_confirmation>
+                                            <all_confirmation translate="title">
+                                                <title>Menu All Confirmations</title>
+                                                <sort_order>20</sort_order>
+                                            </all_confirmation>
+                                        </children>
+                                    </othergroup>
+                                    <actions translate="title">
+                                        <title>Actions</title>
+                                        <sort_order>30</sort_order>
+                                        <children>
+                                            <view translate="title"><title>View Confirmation</title><sort_order>10</sort_order></view>
+                                            <accept translate="title"><title>Accept Confirmation</title><sort_order>20</sort_order></accept>
+                                            <reject translate="title"><title>Reject Confirmation</title><sort_order>30</sort_order></reject>
+                                        </children>
+                                    </actions>
+                                </children>
+                            </payment_confirmation>
+                        </children>
+                    </mamoku>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

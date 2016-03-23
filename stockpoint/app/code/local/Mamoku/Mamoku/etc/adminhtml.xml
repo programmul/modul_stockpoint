@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <mamoku translate="title" module="mamoku">
+            <title>Mamoku</title>
+            <sort_order>150</sort_order>            
+        </mamoku>
+    </menu>
+</config>

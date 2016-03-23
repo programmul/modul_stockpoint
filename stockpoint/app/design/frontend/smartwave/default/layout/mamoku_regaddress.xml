@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <customer_account_create>
+       <!-- <reference name="head">       
+       <action method="addItem"><type>js</type><name>ajax_kota.js</name></action>
+        </reference>-->
+        <reference name="customer_form_register"> 
+            <action method="setTemplate"><template>mamoku/regaddress/register.phtml</template></action> 
+        </reference>
+    </customer_account_create>
+    <customer_account_edit translate="label">
+        <reference name="customer_edit">
+        	<action method="setTemplate"><template>mamoku/regaddress/edit.phtml</template></action>
+        </reference>
+    </customer_account_edit>
+    <customer_address_index translate="label">        
+        <reference name="address_book">
+            <action method="setTemplate"><template>mamoku/regaddress/book.phtml</template></action>
+        </reference>
+    </customer_address_index>
+    <customer_address_form translate="label">        
+        <reference name="customer_address_edit">
+            <action method="setTemplate"><template>mamoku/regaddress/book-edit.phtml</template></action>
+        </reference>
+    </customer_address_form>
+</layout>

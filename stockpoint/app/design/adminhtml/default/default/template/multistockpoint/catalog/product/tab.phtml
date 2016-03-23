@@ -1,0 +1,172 @@
+<?php
+/**
+ * Custom tab template
+ */
+$url=$this->helper('core/url')->getCurrentUrl();
+$i=explode('/id/', $url);
+if(count($i)>0){
+	$i=explode('/',$i[1]);
+	$id=$i[0];
+
+
+}
+$stockpoints=mage::getModel('multistockpoint/stockpoint')->getCollection();
+$spoints=[];
+foreach ($stockpoints as $stockpoint){
+
+            //write the collection array as a CSV.
+            $spoint = (object)$stockpoint->toArray();
+            $spoints[]=$spoint;
+
+         }
+
+?>
+
+ <div id="gridpriceqty">
+ </div>
+ <input style="display:none" type="text" class="input-text" name="price_qty" id="priceqty" value="<?php echo Mage::getSingleton("adminhtml/session")->getProductPriceqty(); ?>" />
+<script id="entry-template" type="text/x-handlebars-template">
+<div class="grid">
+    <div class="hor-scroll">
+    <table class="data" id="stockpointGrid_table" cellspacing="0">
+                <colgroup><col class="a-center" width="20">
+                <col width="50">
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                            </colgroup><thead>
+                                    <tr class="headings">
+
+                                            <th><span class="nobr"><a href="#" name="code" title="asc" class="not-sort"><span class="sort-title">code stockpoint</span></a></span></th>
+                                            <th><span class="nobr"><a href="#" name="name" title="asc" class="not-sort"><span class="sort-title">name stockpoint</span></a></span></th>
+                                            <?php
+                                                $pricetype=Mage::getModel("multistockpoint/pricetype")->getCollection();
+                                                foreach ($pricetype as $price) {
+
+                                            ?>
+                                                    
+                                            <th><span class="nobr"><a href="#" name="<?php echo $price->getTypename(); ?>" title="asc" class="not-sort"><span class="sort-title"><?php echo $price->getTypename(); ?></span></a></span></th>
+                                            
+                                            <?php
+                                                 }
+                                            ?>
+                                  
+                                            <th><span class="nobr"><a href="#" name="qtystock" title="asc" class="not-sort"><span class="sort-title">qty</span></a></span></th>
+                                        </tr>
+
+                            </thead>
+
+        <tbody>
+        {{#each stockpoints}}
+                            <tr class="even pointer" title="">
+
+
+
+
+                                                        <td class="a-right a-right ">
+                        {{code}}                    </td>
+
+
+                                                        <td class=" ">
+                        {{name}}                    </td>
+
+                        <?php
+                        foreach ($pricetype as $price) {
+                        ?>
+                                                        <td class=" ">
+                        <input class="stockprice <?php echo $price->getTypename(); ?>" type="number" style="width:100%" stockid="{{id}}"/>                    </td>
+                        
+                        <?php } ?>
+                        
+                        
+                                                        <td class=" ">
+                        <input class="stockqty" type="number" style="width:100%" stockid="{{id}}"/>                    </td>
+
+
+
+
+                        </tr>
+                        {{/each}}
+
+                                    </tbody>
+
+    </table>
+    </div>
+</div>
+</script>
+<script>
+foo('a[title=Prices]').parents('li').remove()
+//foo('a[title=Prices]').parents('li').remove()
+var stockpoints=JSON.parse('<?php echo json_encode($spoints); ?>');
+var source   = foo("#entry-template").html();
+var template = Handlebars.compile(source);
+var html    = template({
+	stockpoints:stockpoints
+});
+
+var data="<?php echo Mage::getSingleton("adminhtml/session")->getProductPriceqty(); ?>"
+data=data.replaceAll('"',"")
+data=data.replaceAll("'",'"')
+if(data=='{'){
+    data='{}'
+}
+if (data!='' &&  /^[\],:{}\s]*$/.test(data.replace(/\\["\\\/bfnrtu]/g, '@').
+replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
+replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+
+  //the json is ok
+var obj=JSON.parse(data)
+}else{
+var obj={}
+  //the json is not ok
+
+}
+var newobj={}
+<?php
+foreach ($pricetype as $price) {
+echo "newobj.".$price->getTypename().'={};';
+}
+?>
+newobj.qty={}
+var c={}
+c=newobj;
+for(var i in obj){
+    if(JSON.stringify(obj[i])!='{}')
+        c[i]=obj[i]
+}
+for(var i in newobj){        
+        c[i]=newobj[i]
+}
+
+newobj=c;
+foo('#gridpriceqty').html(html)
+<?php
+foreach ($pricetype as $price) {
+?>
+if(obj.<?php echo $price->getTypename(); ?>){
+	for(var itemstock in obj.<?php echo $price->getTypename(); ?>){
+		foo('input[stockid='+itemstock+'].<?php echo  $price->getTypename(); ?>').val(obj.<?php echo $price->getTypename(); ?>[itemstock])
+	}
+}
+<?php } ?>
+if(obj.qty){
+	for(var itemstock in obj.qty){
+		foo('input[stockid='+itemstock+'].stockqty').val(obj.qty[itemstock])
+	}
+}
+<?php
+foreach ($pricetype as $price) {
+?>
+foo('.<?php echo $price->getTypename(); ?>').blur(function(){
+	newobj.<?php echo $price->getTypename(); ?>[foo(this).attr('stockid')]=foo(this).val()
+	foo('#priceqty').val(JSON.stringify(newobj).replaceAll('"',"'"))
+})
+<?php } ?>
+foo('.stockqty').blur(function(){
+	newobj.qty[foo(this).attr('stockid')]=foo(this).val()
+	foo('#priceqty').val(JSON.stringify(newobj).replaceAll('"',"'"))
+})
+
+</script>

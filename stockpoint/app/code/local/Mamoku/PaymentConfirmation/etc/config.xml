@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    Mamoku
+ * @package     Mamoku_PaymentConfirmation
+ * @copyright   Copyright (c) 2015 mamoku
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/**
+ * Installer to create table mamoku_payment_confirmation
+ *
+ * @author      mamoku <info@mamoku.com>
+ */
+ -->
+<config>
+    <modules>
+        <Mamoku_PaymentConfirmation>
+            <version>0.0.3</version>
+        </Mamoku_PaymentConfirmation>
+    </modules>
+    <global>
+        <helpers>
+            <paymentconfirmation>
+                <class>Mamoku_PaymentConfirmation_Helper</class>
+            </paymentconfirmation>
+        </helpers>
+        <blocks>
+            <paymentconfirmation>
+                <class>Mamoku_PaymentConfirmation_Block</class>
+            </paymentconfirmation>
+        </blocks>
+        <models>
+            <paymentconfirmation>
+                <class>Mamoku_PaymentConfirmation_Model</class>
+                <resourceModel>paymentconfirmation_mysql4</resourceModel>
+            </paymentconfirmation>
+            <paymentconfirmation_mysql4>
+                <class>Mamoku_PaymentConfirmation_Model_Mysql4</class>   
+                <entities>
+                    <confirmation>
+                        <table>mamoku_payment_confirmation</table>
+                    </confirmation>
+                </entities>  
+            </paymentconfirmation_mysql4>      
+        </models>
+        <resources>
+        	<mamoku_payment_confirmation_setup>
+                <setup>
+                    <module>Mamoku_PaymentConfirmation</module>
+                </setup>
+                <connection>
+					<use>core_setup</use>
+				</connection>
+            </mamoku_payment_confirmation_setup>
+            <paymentconfirmation_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </paymentconfirmation_write>
+            <paymentconfirmation_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </paymentconfirmation_read>      
+        </resources>
+        <template>
+            <email>
+                <notifikasibuatadmin>
+                    <label>Notification</label>
+                    <file>notifikasibuatadmin.html</file>
+                    <type>html</type>
+                </notifikasibuatadmin>
+            </email>
+        </template>
+    </global>
+    <frontend>
+        <routers>
+            <paymentconfirmation>
+                <use>standard</use>
+                <args>
+                    <module>Mamoku_PaymentConfirmation</module>
+                    <frontName>paymentconfirmation</frontName>
+                </args>
+            </paymentconfirmation>
+        </routers>  
+        <layout>
+            <updates>
+                <paymentconfirmation>
+                    <file>paymentconfirmation.xml</file>
+                </paymentconfirmation>
+            </updates>
+        </layout>
+        <events>
+            <faspay_payment_status_save>
+                <observers>
+                    <paymentconfirmation_from_faspay>
+                        <class>paymentconfirmation/observer</class>
+                        <method>createPaymentConfirmationForFaspay</method>
+                    </paymentconfirmation_from_faspay>
+                </observers>
+            </faspay_payment_status_save>
+            <ipgdoku_payment_status_save>
+                <observers>
+                    <paymentconfirmation_from_ipgdoku>
+                        <class>paymentconfirmation/observer</class>
+                        <method>createPaymentConfirmationForIpgDoku</method>
+                    </paymentconfirmation_from_ipgdoku>
+                </observers>
+            </ipgdoku_payment_status_save>
+        </events>
+    </frontend>
+    <admin>
+        <routers>
+            <paymentconfirmation>
+                <use>admin</use>
+                <args>
+                    <module>Mamoku_PaymentConfirmation</module>
+                    <frontName>paymentconfirmation</frontName>
+                </args>
+            </paymentconfirmation>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Mamoku_PaymentConfirmation before="Mage_Adminhtml">Mamoku_PaymentConfirmation_Adminhtml</Mamoku_PaymentConfirmation>
+                    </modules>
+                </args>
+          </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <events>
+            <sales_order_invoice_save_after>
+                <observers>
+                    <paymentconfirmation_accept_confirmation>
+                        <class>paymentconfirmation/observer</class>
+                        <method>acceptConfirmation</method>
+                    </paymentconfirmation_accept_confirmation>
+                </observers>
+            </sales_order_invoice_save_after>
+            <order_cancel_after>
+                <observers>
+                    <paymentconfirmation_reject_confirmation>
+                        <class>paymentconfirmation/observer</class>
+                        <method>rejectConfirmation</method>
+                    </paymentconfirmation_reject_confirmation>
+                </observers>
+            </order_cancel_after>
+        </events>
+    </adminhtml>
+</config>    

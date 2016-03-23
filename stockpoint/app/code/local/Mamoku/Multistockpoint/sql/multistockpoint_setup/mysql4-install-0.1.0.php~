@@ -1,0 +1,67 @@
+<?php
+$installer = $this;
+$installer->startSetup();
+$sql=<<<SQLTEXT
+
+CREATE TABLE IF NOT EXISTS `pricetype` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `typename` varchar(200) DEFAULT NULL,
+  `minqty` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `locationcoverage` (
+  `propinsi` varchar(200) NOT NULL,
+  `kota` varchar(200) NOT NULL,
+  `kecamatan` varchar(200) NOT NULL,
+  `kelurahan` varchar(200) NOT NULL,
+  `stockpoint_code` varchar(200) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `outlet`;
+CREATE TABLE IF NOT EXISTS `outlet` (
+  `name` varchar(200) NOT NULL,
+  `alamat` varchar(200) NOT NULL,
+  `propinsi` varchar(200) NOT NULL,
+  `kota` varchar(200) NOT NULL,
+  `kecamatan` varchar(200) NOT NULL,
+  `kelurahan` varchar(200) NOT NULL,
+  `code` varchar(200) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE IF NOT EXISTS `stockpoint` (
+ `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ `code` varchar(200) NOT NULL,
+ `name` varchar(50) NOT NULL,
+ `address` text NOT NULL,
+ `email` varchar(50) NOT NULL,
+ `telephone` varchar(15) NOT NULL,
+ `officer` varchar(50) NOT NULL,
+ `handphone` varchar(12) NOT NULL,
+ `distribution_center` varchar(50) NOT NULL,
+ `branch` varchar(50) NOT NULL,
+ `description` varchar(100) DEFAULT NULL,
+ `catatan` text,
+ `last_sync_time` datetime
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `mamoku_lokasi`(
+`id` int(12) not null primary key auto_increment,
+`propinsi` varchar(50) not null,
+`city` varchar(50) not null,
+`kecamatan` varchar(50) not null,
+`kelurahan` varchar(50) not null)
+SQLTEXT;
+
+$installer->run($sql);
+//demo
+//Mage::getModel('core/url_rewrite')->setId(null);
+//demo
+echo "<h1>congrats! Momoku installed</h1>";
+$installer->endSetup();

@@ -1,0 +1,316 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Mamoku_Multistockpoint>
+      <version>0.1.0</version>
+    </Mamoku_Multistockpoint>
+  </modules>
+  <global>
+<events>
+	<sales_quote_add_item>
+        <observers>
+            <Mamoku_Multistockpoint_Model_Observer>
+                <type>singleton</type>
+                <class>Mamoku_Multistockpoint_Model_Observer</class>
+                <method>updatePrice</method>
+            </Mamoku_Multistockpoint_Model_Observer>
+        </observers>
+    </sales_quote_add_item>
+    <checkout_cart_product_update_after>
+        <observers>
+            <Mamoku_Multistockpoint_Model_Observer>
+                <type>singleton</type>
+                <class>Mamoku_Multistockpoint_Model_Observer</class>
+                <method>updatePrice2</method>
+            </Mamoku_Multistockpoint_Model_Observer>
+        </observers>
+    </checkout_cart_product_update_after>
+    <checkout_cart_update_items_after>
+        <observers>
+            <Mamoku_Multistockpoint_Model_Observer>
+                <type>singleton</type>
+                <class>Mamoku_Multistockpoint_Model_Observer</class>
+                <method>updatePriceAll</method>
+            </Mamoku_Multistockpoint_Model_Observer>
+        </observers>
+    </checkout_cart_update_items_after>
+    <checkout_cart_save_after>
+        <observers>
+            <Mamoku_Multistockpoint_Model_Observer>
+                <type>singleton</type>
+                <class>Mamoku_Multistockpoint_Model_Observer</class>
+                <method>updatePriceSaveAjax</method>
+            </Mamoku_Multistockpoint_Model_Observer>
+        </observers>
+    </checkout_cart_save_after>    
+    
+    
+</events>
+  <sales>
+	<order>
+	  <statuses>
+		<shipping_status translate="label"><label>shipping_status</label></shipping_status>
+	  </statuses>
+	  <states>
+		<complete>
+		  <statuses>
+			<shipping_status />
+		  </statuses>
+		</complete>
+	  </states>
+	</order>
+ </sales>
+    <helpers>
+      <multistockpoint>
+        <class>Mamoku_Multistockpoint_Helper</class>
+      </multistockpoint>
+      
+    </helpers>
+	<blocks>
+		
+	  <multistockpoint>
+		<class>Mamoku_Multistockpoint_Block</class>
+	  </multistockpoint>
+			<catalog>
+				<rewrite>
+					<product>Mamoku_Multistockpoint_Block_Catalog_Product</product>
+					<product_view>Mamoku_Multistockpoint_Block_Catalog_Product_View</product_view>
+                                        <product_widget_new>Mamoku_Multistockpoint_Block_Catalog_Product_New</product_widget_new>
+					
+				</rewrite>
+                               
+			</catalog>
+			<page>
+			<rewrite>			
+				<html_head>Mamoku_Multistockpoint_Block_Html_Head</html_head>
+			</rewrite>
+			</page>
+			
+					
+				
+	</blocks>
+	
+	<models>
+
+	  <multistockpoint>
+		<class>Mamoku_Multistockpoint_Model</class>
+		<resourceModel>multistockpoint_mysql4</resourceModel>
+	  </multistockpoint>
+<catalog>
+	<rewrite>
+                    <product>Mamoku_Multistockpoint_Model_Catalog_Product</product>
+                   
+     </rewrite>
+</catalog>
+<customer>
+                <rewrite>
+                    <customer>Mamoku_Multistockpoint_Model_Customer</customer>
+                    
+                </rewrite>
+
+            </customer>
+            <order>
+            	<rewrite>
+            		<invoice>Mamoku_Multistockpoint_Model_Order_Invoice</invoice>
+            	</rewrite>
+            </order>
+
+
+	  <multistockpoint_mysql4>
+		<class>Mamoku_Multistockpoint_Model_Mysql4</class>
+		<entities>		  
+			  <stockpoint>
+				<table>stockpoint</table>
+			  </stockpoint>		  
+			  <locationcoverage>
+				<table>locationcoverage</table>
+			  </locationcoverage>		  
+			  <pricetype>
+				<table>pricetype</table>
+			  </pricetype>
+			  <outlet>
+				<table>outlet</table>
+			  </outlet>
+        </entities>
+	  </multistockpoint_mysql4>
+			<cataloginventory>
+				<rewrite>
+					<stock_item>Mamoku_Multistockpoint_Model_CatalogInventory_Stock_Item</stock_item>
+				</rewrite>
+			</cataloginventory>
+	</models>
+	<resources>
+	  <multistockpoint_setup>
+		<setup>
+		  <module>Mamoku_Multistockpoint</module>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </multistockpoint_setup>
+	  <multistockpoint_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </multistockpoint_write>
+	  <multistockpoint_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </multistockpoint_read>
+	  <customerattribute1445141480_setup>
+		<setup>
+		  <module>Mamoku_Multistockpoint</module>
+		  <class>Mage_Customer_Model_Entity_Setup</class>
+		</setup>
+		<connection>
+		  <use>core_setup</use>
+		</connection>
+	  </customerattribute1445141480_setup>
+	  <customerattribute1445141480_write>
+		<connection>
+		  <use>core_write</use>
+		</connection>
+	  </customerattribute1445141480_write>
+	  <customerattribute1445141480_read>
+		<connection>
+		  <use>core_read</use>
+		</connection>
+	  </customerattribute1445141480_read>
+  
+	</resources>
+  </global>
+<frontend>
+        <routers>
+            <customer>
+                <args>
+                    <modules>
+                        <mamoku_multistockpoint before="Mage_Customer">Mamoku_Multistockpoint</mamoku_multistockpoint>
+                        
+                    </modules>
+                </args>
+            </customer>
+            <customer_addresscontroller>
+                <args>
+                    <modules>
+                        <mamoku_multistockpoint before="Mage_Customer">Mamoku_Multistockpoint</mamoku_multistockpoint> 
+                    </modules>
+                </args>
+            </customer_addresscontroller>
+        </routers>
+    </frontend>  
+  <admin>
+	<routers>
+	  <multistockpoint>
+	    <use>admin</use>
+		<args>
+		  <module>Mamoku_Multistockpoint</module>
+		  <frontName>admin_multistockpoint</frontName>
+		</args>
+	  </multistockpoint>
+	</routers>
+  </admin>
+  <adminhtml>
+ <events> 	
+ 	<catalog_product_edit_action>
+                <observers>
+                    <Mamoku_save_product_data>
+                        <type>singleton</type>
+                        <class>multistockpoint/observer</class>
+                        <method>editProductTabData</method>
+                    </Mamoku_save_product_data>
+                </observers>
+            </catalog_product_edit_action>
+            <catalog_product_save_after>
+                <observers>
+                    <Mamoku_save_product_data>
+                        <type>singleton</type>
+                        <class>multistockpoint/observer</class>
+                        <method>saveProductTabData</method>
+                    </Mamoku_save_product_data>
+                </observers>
+            </catalog_product_save_after>
+           <catalog_product_new_action>
+                <observers>
+                    <Mamoku_save_product_data>
+                        <type>singleton</type>
+                        <class>multistockpoint/observer</class>
+                        <method>initProductTabData</method>
+                    </Mamoku_save_product_data>
+                </observers>
+            </catalog_product_new_action>
+
+        </events>  	
+	<menu>
+	  <multistockpoint module="multistockpoint">
+		<title>Magento Modul Ku</title>
+		<sort_order>100</sort_order>
+		<children>		
+		<!-- <outlet module="multistockpoint">
+		    <title>Manage Outlet</title>
+			<sort_order>0</sort_order>
+			<action>admin_multistockpoint/adminhtml_outlet</action>
+		  </outlet>   -->
+<locationcoverage module="multistockpoint">
+		    <title>Manage Locationcoverage</title>
+			<sort_order>0</sort_order>
+			<action>admin_multistockpoint/adminhtml_locationcoverage</action>
+		  </locationcoverage>
+		  <pricetype module="multistockpoint">
+		    <title>Manage Pricetype</title>
+			<sort_order>1</sort_order>
+			<action>admin_multistockpoint/adminhtml_pricetype</action>
+		  </pricetype>			
+		  <stockpoint module="multistockpoint">
+		    <title>Manage Location</title>
+			<sort_order>2</sort_order>
+			<action>admin_multistockpoint/adminhtml_stockpoint</action>
+		  </stockpoint>
+
+		</children>
+	  </multistockpoint>
+	</menu>
+	<acl>
+	  <resources>
+		<all>
+		  <title>Allow Everything</title>
+		</all>
+		<admin>
+		  <children>
+			<multistockpoint translate="title" module="multistockpoint">
+			  <title>Multistockpoint</title>
+			  <sort_order>1000</sort_order>
+			  <children>
+			  	
+			  	<locationcoverage translate="title">
+			<title>Manage Locationcoverage</title>
+			<sort_order>0</sort_order>
+		  </locationcoverage>
+		  <pricetype translate="title">
+			<title>Manage Pricetype</title>
+			<sort_order>20</sort_order>
+		  </pricetype>
+		  <multistockpointbackend translate="title">
+			<title>Multi Stock Point</title>
+		  </multistockpointbackend>
+		  <stockpoint translate="title">
+			<title>Manage Stockpoint</title>
+			<sort_order>0</sort_order>
+		  </stockpoint>
+
+			  </children>
+			</multistockpoint>
+		  </children>
+		</admin>
+	  </resources>
+	</acl>
+	<layout>
+	  <updates>
+ 			
+		<multistockpoint>
+		  <file>multistockpoint.xml</file>
+		</multistockpoint>
+	  </updates>
+	</layout>
+  </adminhtml>
+</config> 

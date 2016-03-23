@@ -1,0 +1,223 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    KS
+ * @package     KS_PaymentConfirmation
+ * @copyright   Copyright (c) 2014 Kemana Services (http://www.kemanaservices.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/**
+ * Block KS_PaymentConfirmation_Block_Form
+ *
+ * @author      Edi Suryadi <esuryadi@kemanaservices.com>
+ */
+?>
+<?php $_helper = Mage::helper('paymentconfirmation/data'); ?>
+<?php $storeId = Mage::app()->getStore()->getStoreId(); ?>
+<?php $currentGroupID = Mage::getSingleton('customer/session')->getCustomerGroupId(); ?>
+<?php $confirmation = Mage::getModel('paymentconfirmation/confirmation')->getCollection()->loadByOrder($this->getRealOrderId())->getLastItem()->getData(); ?>
+<?php $CSOGroupId = $_helper->getCSOGroupID(); ?>
+<?php if($currentGroupID == $CSOGroupId): ?>
+<?php $title = $_helper->getCSOStatusTitle(); ?>
+<?php else: ?>
+<?php $title = $_helper->getOtherStatusTitle(); ?>    
+<?php endif; ?>
+
+<div class="payment-confirmation-stamp">
+	<?php $confirmationStatus = $confirmation[0]['confirmation_status']; ?>
+	<?php if($confirmationStatus == 0):?>
+		<img src="<?php echo $this->getSkinUrl('images/being-verified.png');?>" />
+	<?php elseif($confirmationStatus == 1): ?>
+		<img src="<?php echo $this->getSkinUrl('images/accepted.png');?>" />
+	<?php elseif($confirmationStatus == 2): ?>
+		<img src="<?php echo $this->getSkinUrl('images/rejected.png');?>" />
+	<?php endif; ?>
+</div>
+<div class="payment-confirmation-container">
+	<?php if($currentGroupID == $CSOGroupId): ?>
+	<div class="fieldset">
+		<h2 class="legend"><?php echo $this->__($title).' - '.$this->__('Order').' <span class="order-number">#'.$this->getRealOrderId().'</span>' ?></h2>
+		<a class="linkCloseViewPaymentConfirmation" href="javascript:void(0)"><?php echo $this->__('Close') ?></a>
+		<div class="form-left">
+			<ul class="form-list">
+				<li class="fields">
+            		<div class="field transfer-date">
+            			<label for="transfer-date-picker"><?php echo $this->__('Payment Date') ?></label>
+            			<span class="label-hint"><?php echo $this->__('Payment date on receipt') ?></span>
+				        <div class="input-box">
+				            <div class="date-container">
+				            	<input type="text" class="input-text" value="<?php echo $confirmation[0]['transfer_date'] != '' ? date('d F Y', strtotime($confirmation[0]['transfer_date'])) : ''?>" readonly />
+				            </div>
+				        </div>
+            		</div>
+            	</li>
+            	<li class="fields">
+            		<div class="field shop-code">
+            			<label for="shop_code"><?php echo $this->__('Shop Code') ?></label>
+            			<span class="label-hint"><?php echo $this->__('Your shop code') ?></span>
+				        <div class="input-box">
+				            <input type="text" class="input-text" maxlength="50" title="Shop Code" name="shop_code" value="<?php echo $confirmation[0]['shop_code']?>" readonly>
+				        </div>
+            		</div>
+            	</li>
+            	<li class="fields">
+            		<div class="field receipt-no">
+            			<label for="receipt_no"><?php echo $this->__('Receipt Number') ?></label>
+				        <div class="input-box">
+				            <input type="text" class="input-text" maxlength="100" title="Receipt Number" name="receipt_no" value="<?php echo $confirmation[0]['receipt_no']?>" readonly>
+				        </div>
+            		</div>
+            	</li>
+            	<li class="fields">
+            		<div class="field cashier-name">
+            			<label for="cashier_name"><?php echo $this->__('Cashier Name') ?></label>
+				        <div class="input-box">
+				            <input type="text" class="input-text" maxlength="100" title="Cashier Name" name="cashier_name" value="<?php echo $confirmation[0]['cashier_name']?>" readonly>
+				        </div>
+            		</div>
+            	</li>
+        	</ul>
+    	</div>
+    	<div class="form-right">
+    		<ul class="form-list">
+            	<li class="fields">
+            		<div class="field transfer-amount">
+            			<label for="transfer_amount"><?php echo $this->__('Transfer Amount') ?></label>
+				        <div class="input-box">
+				            <input type="text" class="input-text" maxlength="255" title="Transfer Amount" name="transfer_amount" value="<?php echo $confirmation[0]['transfer_amount']?>" readonly>
+				        </div>
+            		</div>
+            	</li>
+            	<li class="fields">
+            		<div class="field buyer-name">
+            			<label class="optional" for="buyer_name"><?php echo $this->__('Buyer Name') ?></label>
+            			<span class="label-hint"><?php echo $this->__('Optional') ?></span>
+				        <div class="input-box">
+				            <input type="text" class="input-text" maxlength="100" title="Buyer Name" name="buyer_name" value="<?php echo $confirmation[0]['buyer_name']?>" readonly>
+				        </div>
+            		</div>
+            	</li>
+            	<li class="fields">
+            		<div class="field buyer-email">
+            			<label class="optional" for="buyer_email"><?php echo $this->__('Buyer Email') ?></label>
+            			<span class="label-hint"><?php echo $this->__('Optional') ?></span>
+				        <div class="input-box">
+				            <input type="text" class="input-text validate-email" maxlength="100" title="Buyer Email" name="buyer_email" value="<?php echo $confirmation[0]['buyer_email']?>" readonly>
+				        </div>
+            		</div>
+            	</li>
+            	<li class="fields">
+            		<div class="field buyer-phone">
+            			<label class="optional" for="buyer_phone"><?php echo $this->__('Buyer Phone') ?></label>
+            			<span class="label-hint"><?php echo $this->__('Optional') ?></span>
+				        <div class="input-box">
+				            <input type="text" class="input-text validate-number" maxlength="50" title="Buyer Phone" name="buyer_phone" value="<?php echo $confirmation[0]['buyer_phone']?>" readonly>
+				        </div>
+            		</div>
+            	</li>
+    		</ul>
+    	</div>
+    	<div class="form-center">
+    		<ul class="form-list">
+        		<li class="fields">
+            		<div class="field confirmation-notes">
+            			<label for="notes"><?php echo $this->__('Notes') ?></label>
+				        <div class="input-box">
+				            <textarea title="Notes of confirmation" name="notes" spellcheck="false"><?php echo $confirmation[0]['notes']?></textarea>
+				        </div>
+            		</div>
+            	</li>
+        	</ul>	
+    	</div>
+	</div>
+	<?php else: ?>	
+	<div class="fieldset">
+		<h2 class="legend"><?php echo $this->__($title).' - '.$this->__('Order').' <span class="order-number">#'.$this->getRealOrderId().'</span>' ?></h2>
+		<a class="linkCloseViewPaymentConfirmation" href="javascript:void(0)">Close</a>
+		<div class="form-left">
+			<ul class="form-list">
+				<li class="fields">
+            		<div class="field transfer-date">
+            			<label for="transfer-date-picker"><?php echo $this->__('Transfer Date') ?></label>
+				        <div class="input-box">
+				            <div class="date-container">
+				            	<input type="text" class="input-text" value="<?php echo $confirmation[0]['transfer_date'] != '' ? date('d F Y', strtotime($confirmation[0]['transfer_date'])) : ''?>" readonly />
+				            </div>
+				        </div>
+            		</div>
+            	</li>
+            	<li class="fields">
+            		<div class="field transfer-from">
+            			<label for="transfer_from"><?php echo $this->__('Transfer From') ?></label>
+            			<span class="label-hint"><?php echo $this->__('Your bank name') ?></span>
+				        <div class="input-box">
+				            <input type="text" class="input-text" maxlength="255" title="Transfer from bank" name="transfer_from" value="<?php echo $confirmation[0]['transfer_from']?>" readonly>
+				        </div>
+            		</div>
+            	</li>
+            	<li class="fields">
+            		<div class="field depositor-name">
+            			<label for="transfer_from"><?php echo $this->__('Depositor Name') ?></label>
+            			<span class="label-hint"><?php echo $this->__('Name in your bank account') ?></span>
+				        <div class="input-box">
+				            <input type="text" class="input-text" maxlength="150" title="Bank Account Name" name="bank_account_name" value="<?php echo $confirmation[0]['bank_account_name']?>" readonly>
+				        </div>
+            		</div>
+            	</li>
+        	</ul>
+    	</div>
+    	<div class="form-right">
+    		<ul class="form-list">
+    			<li class="fields">
+            		<div class="field transfer-to">
+            			<label for="transfer_to"><?php echo $this->__('Transfer To') ?></label>
+            			<div class="input-box">
+				            <input type="text" class="input-text" maxlength="150" title="Transfer To" name="transfer_to" value="<?php echo is_numeric($confirmation[0]['transfer_to']) ? Mage::getModel('banktransferaccount/bank')->getBankLabelOneLine($confirmation[0]['transfer_to']) : ''; ?>" readonly>
+				        </div>
+            		</div>
+            	</li>
+            	<li class="fields">
+            		<div class="field transfer-method">
+            			<label for="transfer_to"><?php echo $this->__('Transfer Method') ?></label>
+            			<div class="input-box">
+				            <input type="text" class="input-text" maxlength="150" title="Transfer Method" name="transfer_method" value="<?php echo Mage::getStoreConfig('payment/'.$confirmation[0]['transfer_method'].'/title')?>" readonly>
+				        </div>
+            		</div>
+            	</li>
+            	<li class="fields">
+            		<div class="field transfer-amount">
+            			<label for="transfer_amount"><?php echo $this->__('Transfer Amount') ?></label>
+				        <div class="input-box">
+				            <input type="text" class="input-text" maxlength="150" title="Transfer Amount" name="transfer_amount" value="<?php echo $confirmation[0]['transfer_amount']?>" readonly>
+				        </div>
+            		</div>
+            	</li>
+    		</ul>
+    	</div>
+    	<div class="form-center">
+    		<ul class="form-list">
+        		<li class="fields">
+            		<div class="field confirmation-notes">
+            			<label for="notes"><?php echo $this->__('Notes') ?></label>
+				        <div class="input-box">
+				            <textarea title="Notes of confirmation" name="notes" spellcheck="false"><?php echo $confirmation[0]['notes']?></textarea>
+				        </div>
+            		</div>
+            	</li>
+        	</ul>	
+    	</div>
+	</div>
+	<?php endif; ?>
+</div>

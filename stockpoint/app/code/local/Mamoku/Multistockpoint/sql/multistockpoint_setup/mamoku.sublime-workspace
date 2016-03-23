@@ -1,0 +1,689 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"q",
+				"query"
+			],
+			[
+				"st",
+				"stateChanged"
+			],
+			[
+				"s",
+				"script"
+			],
+			[
+				"con",
+				"contents"
+			],
+			[
+				"co",
+				"contents"
+			],
+			[
+				"att",
+				"attribute"
+			],
+			[
+				"op",
+				"opt"
+			],
+			[
+				"is_n",
+				"is_null"
+			],
+			[
+				"eav_att",
+				"eav_attribute_option_value"
+			],
+			[
+				"fe",
+				"fetchAll"
+			],
+			[
+				"oute",
+				"outlet_type"
+			],
+			[
+				"at",
+				"attribute"
+			],
+			[
+				"option",
+				"optionValue"
+			],
+			[
+				"t",
+				"type"
+			],
+			[
+				"incom",
+				"incomeArray"
+			],
+			[
+				"pr",
+				"printer_abort"
+			],
+			[
+				"tax",
+				"taxArray"
+			],
+			[
+				"ta",
+				"taxArray"
+			],
+			[
+				"final",
+				"finalTax"
+			],
+			[
+				"in",
+				"income"
+			],
+			[
+				"inc",
+				"incomeArray"
+			],
+			[
+				"inco",
+				"incomeArray"
+			],
+			[
+				"cl",
+				"clausa"
+			],
+			[
+				"str_s",
+				"str_split"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"is_i",
+				"is_integer"
+			],
+			[
+				"c",
+				"customer"
+			],
+			[
+				"th",
+				"this"
+			],
+			[
+				"def",
+				"defBill"
+			],
+			[
+				"cus",
+				"custid"
+			],
+			[
+				"Addres",
+				"address"
+			],
+			[
+				"cs",
+				"customerAddressId"
+			],
+			[
+				"attrib",
+				"attribute_id"
+			],
+			[
+				"cit",
+				"cityField"
+			],
+			[
+				"f",
+				"field"
+			],
+			[
+				"ke",
+				"kecamatan"
+			],
+			[
+				"customer_ad",
+				"customer_address_edit"
+			],
+			[
+				"customer_add",
+				"customer_address_new"
+			],
+			[
+				"telep",
+				"time_sleep_until"
+			],
+			[
+				"use",
+				"used_in_forms"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"insert",
+				"insertAfter"
+			],
+			[
+				"after",
+				"insertAfter"
+			],
+			[
+				"opts",
+				"options"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"sto",
+				"stock_point"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "mysql4-install-0.1.0.php~",
+			"settings":
+			{
+				"buffer_size": 1956,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/ali/module-multi-stock-point",
+		"/home/ali/module-multi-stock-point/app",
+		"/home/ali/module-multi-stock-point/app/code",
+		"/home/ali/module-multi-stock-point/app/code/local",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Multistockpoint",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Multistockpoint/Model/Eav",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Multistockpoint/Model/Eav/Entity",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Multistockpoint/Model/Eav/Entity/Attribute",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Multistockpoint/Model/Eav/Entity/Attribute/Source",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Multistockpoint/sql",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Multistockpoint/sql/multistockpoint_setup",
+		"/var/www/html/magento/app/code/local",
+		"/var/www/html/magento/app/code/local/Mamoku",
+		"/var/www/html/magento/app/code/local/Mamoku/Multistockpoint",
+		"/var/www/html/magento/app/code/local/Mamoku/Multistockpoint/sql",
+		"/var/www/html/magento/app/code/local/Mamoku/Multistockpoint/sql/customerattribute1445141480_setup",
+		"/var/www/html/magento/app/code/local/Mamoku/Multistockpoint/sql/multistockpoint_setup",
+		"/var/www/html/magento/var",
+		"/var/www/html/magento/var/report"
+	],
+	"file_history":
+	[
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Removeshipping/Block/Checkout/Onepage.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Removeshipping/Helper/Data.php",
+		"/home/ali/module-multi-stock-point/app/design/frontend/base/default/template/removeshipping/billing.phtml",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Removeshipping/controllers/Checkout/OnepageController.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Removeshipping/etc/config.xml",
+		"/home/ali/module-multi-stock-point/app/etc/modules/Mamoku_Removeshipping.xml",
+		"/home/ali/module-multi-stock-point/app/etc/modules/Mamoku_Multistockpoint.xml",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Multistockpoint/sql/multistockpoint_setup/mysql4-install-0.1.0.php",
+		"/home/ali/module-multi-stock-point/app/design/frontend/base/default/template/mamoku/regaddress/book-edit.phtml",
+		"/home/ali/module-multi-stock-point/app/design/frontend/base/default/template/mamoku/regaddress/register.phtml",
+		"/home/ali/module-multi-stock-point/app/design/frontend/base/default/template/mamoku/regaddress/edit.phtml",
+		"/home/ali/module-multi-stock-point/select_kota.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/controllers/Adminhtml/AddressController.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/controllers/Adminhtml/CategoryController.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/controllers/Adminhtml/CustomerController.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Address/Edit/Tab/Main.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Address/Edit/Tab/Options.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Address/Edit/Form.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Address/Edit/Tabs.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Address/Edit.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Address/Grid.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Category/Edit/Tab/Front.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Category/Edit/Tab/Main.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Category/Edit/Tab/Options.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Category/Edit/Tab/System.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Category/Edit/Form.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Category/Edit/Tabs.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Category/Edit.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Category/Grid.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Customer/Edit/Tab/Front.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Customer/Edit/Tab/Main.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Customer/Edit/Tab/Options.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Customer/Edit/Tab/System.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Customer/Edit/Form.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Customer/Edit/Tabs.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Customer/Edit.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Customer/Grid.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Address.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Category.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/Adminhtml/Customer.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Block/View.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Helper/Data.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/Model/Attributemanager.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/controllers/IndexController.php",
+		"/home/ali/idMarcoRoot/select_kota.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Attributemanager/etc/config.xml",
+		"/home/ali/module-multi-stock-point/app/etc/modules/Mamoku_Attributemanager.xml",
+		"/home/ali/idMarcoRoot/info_lokasi.sql",
+		"/home/ali/module-multi-stock-point/app/design/frontend/base/default/template/mamoku/regaddress/book.phtml",
+		"/var/www/html/magento/app/etc/modules/Hwg_Attributemanager.xml",
+		"/home/ali/module-multi-stock-point/app/design/frontend/base/default/layout/mamoku_regaddress.xml",
+		"/home/ali/module-multi-stock-point/js/ajax_kota.js",
+		"/home/ali/module-multi-stock-point/lib/select_kota.php",
+		"/home/ali/module-multi-stock-point/app/design/frontend/base/default/template/mamoku/regaddress/register-asli.phtml",
+		"/var/www/html/magento/var/log/exception.log",
+		"/var/www/html/magento/var/log/system.log",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Multistockpoint/sql/customerattribute1445141480_setup/mysql4-install-0.1.0.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/RegAddress/Model/Api/Provinsi.php",
+		"/home/ali/module-multi-stock-point/defaddress.php",
+		"/home/ali/module-multi-stock-point/api-provinsi.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/RegAddress/Model/Api/provinsi.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Multistockpoint/Model/Eav/Entity/Attribute/Source/Customeroptionsnpwp.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Multistockpoint/Model/Eav/Entity/Attribute/Source/Customeroptionsoutletype.php",
+		"/var/www/html/magento/app/code/local/Hwg/Attributemanager/Block/Adminhtml/Customer/Edit.php",
+		"/var/www/html/magento/app/code/local/Hwg/Attributemanager/controllers/Adminhtml/CustomerController.php",
+		"/var/www/html/magento/var/report/675548686817",
+		"/home/ali/module-multi-stock-point/app/etc/modules/Mamoku_RegAddress.xml",
+		"/var/www/html/magento/app/code/local/Hwg/Attributemanager/etc/config.xml",
+		"/var/www/html/magento/var/report/959679140022",
+		"/var/www/html/magento/var/report/558118090425",
+		"/var/www/html/magento/app/code/local/Hwg/Attributemanager/Block/Adminhtml/Address/Edit/Form.php",
+		"/var/www/html/idmarco/var/report/993002376662",
+		"/var/www/html/idmarco/var/log/exception.log",
+		"/var/www/html/idmarco/var/log/system.log",
+		"/home/ali/module-multi-stock-point/app/etc/modules/Mamoku_PaymentConfirmation.xml",
+		"/home/ali/module-multi-stock-point/app/etc/modules/Mamoku_BankTransferAccount.xml",
+		"/var/www/html/idmarco/var/report/755224713816",
+		"/var/www/html/idmarco/var/report/339167315700",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Block/Adminhtml/Confirmation/Edit.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Block/Adminhtml/Confirmation/Edit/Tab/Confirmation.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Block/Adminhtml/Confirmation/Edit/Form.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/etc/adminhtml.xml",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/controllers/Adminhtml/ConfirmationController.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/RegAddress/etc/system.xml",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/etc/system.xml",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/BankTransferAccount/etc/system.xml",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Mamoku/etc/system.xml",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/BankTransferAccount/etc/adminhtml.xml",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Mamoku/etc/adminhtml.xml",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Mamoku/etc/config.xml",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Mamoku/Helper/Data.php",
+		"/home/ali/module-multi-stock-point/app/etc/modules/Mamoku_Mamoku.xml",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Multistockpoint/Model/Customer.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Multistockpoint/Model/Eav/Entity/Attribute/Source/Customeroptionsimostatus.php",
+		"/home/ali/module-multi-stock-point/app/etc/modules/Mamoku_Profile.xml",
+		"/home/ali/module-multi-stock-point/app/design/frontend/rwd/default/layout/local.xml",
+		"/var/www/html/idmarco/app/etc/modules/Mamoku_Profile.xml",
+		"/var/www/html/kmk/tarifPajak.php",
+		"/home/ali/module-multi-stock-point/app/design/frontend/rwd/default/template/sales/order/history.phtml",
+		"/home/ali/module-multi-stock-point/app/design/frontend/base/default/template/sales/order/history.phtml",
+		"/home/ali/module-multi-stock-point/app/design/frontend/base/default/template/sales/order/order_history.phtml",
+		"/home/ali/module-multi-stock-point/app/design/frontend/base/default/template/payment/form/banktransfer.phtml",
+		"/var/www/html/idmarco/app/design/frontend/base/default/template/payment/form/banktransfer.phtml",
+		"/var/www/html/myspecs/app/etc/modules/KS_BankTransferAccount.xml",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Multistockpoint/Model/Product.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/Multistockpoint/Block/Catalog/Product/View.php",
+		"/var/www/html/myspecs/app/etc/local.xml",
+		"/home/ali/Downloads/20151105_DB_backup.sql",
+		"/var/www/html/kmk/triangle.php",
+		"/home/ali/module-multi-stock-point/app/etc/modules/Mamoku_Loginku.xml",
+		"/var/www/html/idmarco/var/report/278168444308",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Block/Adminhtml/Confirmation/Edit/Tabs.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Block/Adminhtml/Confirmation/Grid/Column/Customer/Name.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Block/Adminhtml/Confirmation/Grid/Column/Bank.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Block/Adminhtml/Confirmation/Grid/Column/Paymentmethod.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Block/Adminhtml/Confirmation/Grid.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Block/Adminhtml/Csoconfirmation/Edit/Tab/Csoconfirmation.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Block/Adminhtml/Csoconfirmation/Edit/Form.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Block/Adminhtml/Csoconfirmation/Edit/Tabs.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Block/Adminhtml/Csoconfirmation/Grid/Column/Buyer.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Block/Adminhtml/Csoconfirmation/Edit.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Block/Adminhtml/Csoconfirmation/Grid.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Block/Adminhtml/Confirmation.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Block/Adminhtml/Csoconfirmation.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Block/Form.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Block/View.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Helper/Data.php",
+		"/home/ali/module-multi-stock-point/app/code/local/Mamoku/PaymentConfirmation/Model/Mysql4/Confirmation/Collection.php"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/var/www/html/specs/home/specs/website",
+			"",
+			"fuuuuuck",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"billing.save()",
+			"New Address",
+			"MageBuzz",
+			"Hwg",
+			"q",
+			"city",
+			"kecam",
+			"city",
+			"provi",
+			"region",
+			"alert('df",
+			"city",
+			"getAddressForced",
+			"kelura",
+			"local",
+			"edit_form",
+			"gridA",
+			"exc",
+			"hw",
+			"required",
+			"mamoku",
+			"pdo_my",
+			"extension",
+			"pdo",
+			"city",
+			"create_ad",
+			"city",
+			"keca",
+			"kecama",
+			"getAd",
+			"customer_acc",
+			"kecamata",
+			"account_create",
+			"zip",
+			"kelurahan",
+			"kecama",
+			"outle",
+			"getAddres",
+			"setCus",
+			"keca",
+			"outlet_ty",
+			"count",
+			"regio",
+			"region",
+			"region_id",
+			"city",
+			"kecamatan",
+			"kecamata",
+			"form",
+			"fax",
+			"customer_add",
+			"create",
+			"edit",
+			"create",
+			"edit",
+			"create",
+			"customer_account_ed",
+			"customer_create",
+			"countr",
+			"bank",
+			"var_dump",
+			"var_dum",
+			"print_r",
+			"var",
+			"print",
+			"banktransferaccount",
+			"bank",
+			"table",
+			"add",
+			"addt",
+			"cart",
+			"view",
+			"add",
+			"ks",
+			">g",
+			"crete",
+			"requet",
+			"api",
+			"is_conf",
+			"create",
+			"confirmation",
+			"create",
+			"inval",
+			"login",
+			"post",
+			"KS",
+			"login",
+			"country",
+			"requ",
+			"ds",
+			"DS",
+			"ds",
+			"DS",
+			"customer",
+			"filter",
+			"complete",
+			"fax",
+			"outlet",
+			"countr",
+			"_beforeto",
+			"customer",
+			"tel",
+			"count",
+			"z",
+			"amar",
+			"Amar",
+			"acl",
+			"Amar",
+			"amar",
+			"profile",
+			"villages",
+			"regencies",
+			"provinces",
+			"districts",
+			"kelurahan",
+			"kecamatan",
+			"kecamatn",
+			"photo",
+			"getMode",
+			"keca",
+			"outlet_ow",
+			"front",
+			"officer",
+			"last_s",
+			"officer",
+			")\n",
+			"officer",
+			"stockpoint_name"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"Mamoku",
+			"mamoku_",
+			"Mamoku",
+			"mamoku",
+			"Mamoku",
+			"multistockpoint",
+			"",
+			"\\t",
+			"",
+			"fuuck",
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "mysql4-install-0.1.0.php~",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1956,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "mamoku.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"front",
+				"magento/app/code/core/Mage/Sales/Model/Entity/Quote/Address/Attribute/Frontend.php"
+			],
+			[
+				"npwp",
+				"app/code/local/Mamoku/Multistockpoint/Model/Eav/Entity/Attribute/Source/customeroptionsnpwp.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 403.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

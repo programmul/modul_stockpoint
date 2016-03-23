@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <mamoku translate="label" module="mamoku">
+            <label>Mamoku</label>
+            <sort_order>1</sort_order>
+        </mamoku>
+    </tabs>
+</config>

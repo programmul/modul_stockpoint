@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mamoku_Attributemanager>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Mamoku_Attributemanager>
+    </modules>
+</config> 

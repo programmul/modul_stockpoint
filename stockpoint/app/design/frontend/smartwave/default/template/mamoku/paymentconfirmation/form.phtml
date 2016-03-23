@@ -1,0 +1,202 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    KS
+ * @package     KS_PaymentConfirmation
+ * @copyright   Copyright (c) 2014 Kemana Services (http://www.kemanaservices.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/**
+ * Block KS_PaymentConfirmation_Block_Form
+ *
+ * @author      Edi Suryadi <esuryadi@kemanaservices.com>
+ */
+/**
+ *  Form Styles
+ *
+ * .payment-confirmation-container{padding:10px 20px}
+ * .payment-confirmation-container .form-left{width:48%; float:left}
+ * .payment-confirmation-container .form-right{width:48%; float:right}
+ * .payment-confirmation-container .fieldset{margin: 0 !important;}
+ * .payment-confirmation-container textarea{height:240px;font-size:11px;resize:none;}
+ * .payment-confirmation-container select{width: 330px; max-width: 330px; }
+ * .payment-confirmation-container input, .payment-confirmation-container .select-container{background-color:#ffffff;}
+ * .payment-confirmation-container h2.legend{border:none;color:#646464;font-size:16px; width: 80% !important;}
+ * .payment-confirmation-container h2.legend span{color:#0967c9;}
+ * .payment-confirmation-container .linkClosePaymentConfirmation{float:right; display:block}
+ * .payment-confirmation-container .icon-calendar{display: none;}
+ * .payment-confirmation-container .datepick-trigger{cursor: pointer; position: absolute; right: 5px; top: 7px; display: block;}
+ * .payment-confirmation-container .date-container{position: relative;}
+ */
+?>
+
+<?php $_helper = Mage::helper('paymentconfirmation/data'); ?>
+<?php $customer = Mage::getSingleton('customer/session')->getCustomer(); ?>
+<?php $storeId = Mage::app()->getStore()->getStoreId(); ?>
+<?php $currentGroupID = Mage::getSingleton('customer/session')->getCustomerGroupId(); ?>
+<?php $CSOGroupId = $_helper->getCSOGroupID(); ?>
+<?php if($currentGroupID == $CSOGroupId): ?>
+    <?php $title = Mage::getModel('paymentconfirmation/confirmation')->isOrderInRejectedStatus($this->getRealOrderId()) ? $_helper->getCSOReconfirmTitle() : $_helper->getCSOTitle(); ?>
+<?php else: ?>
+    <?php $title = Mage::getModel('paymentconfirmation/confirmation')->isOrderInRejectedStatus($this->getRealOrderId()) ? $_helper->getOtherReconfirmTitle() : $_helper->getOtherTitle(); ?>
+<?php endif; ?>
+<?php $varienForm = 'dataForm_'.$this->getRealOrderId(); ?>
+
+<div class="payment-confirmation-container">
+
+
+<?php
+    $order = Mage::getModel('sales/order')->loadByIncrementID($this->getRealOrderID());
+    //var_dump($order['base_grand_total']);
+    $qouteID = $order['quote_id'];
+    $price = $order['base_grand_total'];
+    $resource = Mage::getSingleton('core/resource');
+    $readConnection = $resource->getConnection('core_read');
+
+    $table = $resource->getTableName('sales/quote_payment');
+    $query = 'SELECT bank_transfer_account FROM ' . $table . ' WHERE quote_id = '. (int)$qouteID . ' LIMIT 1';
+    $bankID = $readConnection->fetchOne($query);
+
+?>
+
+<form id="payment-confirmation-<?php echo $this->getRealOrderId() ?>" class="payment-confirmation-form" method="post" action="<?php echo $this->getFormSubmitUrl() ?>">
+    <div class="fieldset">
+        <input type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" name="form_key">
+        <input type="hidden" name="order_id" value="<?php echo $this->getRealOrderId() ?>" />
+        <input type="hidden" name="oid" value="<?php echo $this->getId() ?>" />
+        <input type="hidden" name="customer_id" value="<?php echo $customer->getId() ?>" />
+        <h2 class="legend"><?php echo $this->__($title).$this->__('Order').' <span class="order-number">#'.$this->getRealOrderId().'</span>' ?>
+        <span class="linkClosePaymentConfirmation" onclick="closePayConfirm('<?php echo $this->getRealOrderId() ?>')">Close</span></h2>
+        <div class="col-md-6">
+            <ul class="form-list">
+                <li class="fields">
+                    <div class="field transfer-date">
+                        <label class="required" for="transfer-date-picker"><?php echo $this->__('Transfer Date') ?></label>
+                        <div class="input-box">
+                            <div class="date-container">
+                                <input type="text" class="datepickerfield input-text" data-order="<?php echo $this->getRealOrderId(); ?>"
+                                       id="transfer-date-picker-<?php echo $this->getRealOrderId(); ?>"
+                                       value="<?php //echo date('m/d/Y');?>" readonly />
+                                <input type="hidden" id="transfer-date-<?php echo $this->getRealOrderId(); ?>" name="transfer_date" class="required-entry" value="<?php echo date('d/m/Y');?>" data-sto="<?php echo $storeId; ?>"/>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field transfer-from">
+                        <label class="required" for="transfer_from"><?php echo $this->__('Transfer From') ?></label>
+                        <span class="label-hint"><?php echo $this->__('Your bank name') ?></span>
+                        <div class="input-box">
+                            <input type="text" class="input-text required-entry" maxlength="255" title="Transfer from bank" name="transfer_from">
+                        </div>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field depositor-name">
+                        <label class="required" for="transfer_from"><?php echo $this->__('Depositor Name') ?></label>
+                        <span class="label-hint"><?php echo $this->__('Name in your bank account') ?></span>
+                        <div class="input-box">
+                            <input type="text" class="input-text required-entry" maxlength="150" title="Bank Account Name" name="bank_account_name">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <ul class="form-list">
+                <li class="fields">
+                    <div class="field transfer-to">
+                        <label class="required" for="transfer_to"><?php echo $this->__('Transfer To') ?></label>
+                        <div class="input-box">
+                            <div class="select-container">
+
+                                <select class="required-entry" id="transfer_to" title="Transfer To" name="transfer_to">
+                                    <?php $optionBankAccounts = Mage::getModel('banktransferaccount/bank')->getCollection()->toOptionArray(); ?>
+                                    <?php foreach ($optionBankAccounts as $bank): ?>
+                                        <option <?php echo $bank['value'] == $bankID ? 'selected="selected"' : "" ?> value="<?php echo $bank['value'] ?>"><?php echo $bank['label'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <?php foreach ($optionBankAccounts as $bank): ?>
+                                    <?php if($bank['value'] == $bankID):?>
+                                        <input type="hidden" value="<?php echo $bank['label'] ?>" name="transferaccount"/>
+                                    <?php endif;?>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field transfer-method">
+                        <label class="required" for="transfer_to"><?php echo $this->__('Transfer Method') ?></label>
+                        <div class="input-box">
+                            <div class="select-container">
+                                <select class="required-entry" title="Transfer Method" name="transfer_method">
+                                    <?php $optionTransferMethod = Mage::getModel('paymentconfirmation/confirmation')->getActivPaymentMethods(array('banktransfer')); ?>
+                                    <?php foreach ($optionTransferMethod as $method): ?>
+                                        <option <?php echo $method['value'] == 'banktransfer' ? 'selected="selected"' : "" ?> value="<?php echo $method['value'] ?>"><?php echo $method['label'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field transfer-amount">
+                        <label class="required" for="transfer_amount"><?php echo $this->__('Transfer Amount') ?></label>
+                        <div class="input-box">
+                            <input type="text" class="input-text required-entry validate-number" maxlength="255" title="Transfer Amount" name="transfer_amount" value="<?php echo round($price) ?>">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-12">
+            <ul class="form-list">
+                <li class="fields">
+                    <div class="field confirmation-notes">
+                        <label for="notes"><?php echo $this->__('Notes') ?></label>
+                        <div class="input-box">
+                            <textarea title="Notes of confirmation" name="notes" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="buttons-set">
+            <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+            <button id="submitPaymentConfirmation" onclick="showLoader('<?php echo $this->getRealOrderId()?>')" class="button submitPaymentConfirmation" title="Send Confirmation"><span><?php echo $this->__('Send') ?></span></button>
+		        <span class="please-wait" id="please-wait-<?php echo $this->getRealOrderId(); ?>" style="display: none">
+            		<img class="v-middle" title="<?php echo $this->__('Submitting payment confirmation...') ?>" alt="<?php echo $this->__('Submitting payment confirmation...') ?>" src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>"><?php echo $this->__('Submitting payment confirmation...') ?></span>
+        </div>
+    </div>
+</form>
+    <script type="text/javascript">
+        //<![CDATA[
+        var dataForm = new VarienForm('payment-confirmation-'+<?php echo $this->getRealOrderId() ?>, true);
+        //]]>
+    </script>
+</div>
+<script>
+    //$j(".please-wait").hide();
+    function closePayConfirm(orderid)
+    {
+        $j("#paycon-"+orderid).hide();
+    }
+    function showloader(orderid){
+        $j("#please-wait-"+orderid).show();
+    }
+
+</script>

@@ -1,0 +1,152 @@
+<?php
+	$confirmationId = (int) $this->getRequest()->getParam('id');
+    $confirmation = Mage::getModel('paymentconfirmation/confirmation')->getCollection()
+                                                                      ->addFieldToFilter('confirmation_id', $confirmationId);
+
+    $_customer = Mage::getModel('customer/customer')->load((int) $confirmation->getCustomerId());
+
+    $_order = Mage::getModel('sales/order');
+
+    $_orderEntityId = $_order->getCollection()
+                            ->addFieldToSelect('entity_id')
+                            ->addAttributeToFilter('increment_id', (int) $confirmation->getOrderId())
+                            ->getData();
+    $orderEntityId = $_orderEntityId[0]['entity_id'];                        
+    $order = $_order->load($orderEntityId);
+
+    $_orderPayment = Mage::getModel('sales/order_payment')->getCollection()->addAttributeToFilter('parent_id', $orderEntityId)->getData();
+    $paymentMethod = Mage::getStoreConfig('payment/'.$_orderPayment[0]['method'].'/title');
+    $bankAccount = $_orderPayment[0]['bank_transfer_account'];
+
+    $confirmationStatus = $confirmation->getStatus();
+    $statusLabel = Mage::getModel('paymentconfirmation/confirmation')->getStatusLabel($confirmationStatus);
+    $info = unserialize($confirmation->getInfo());
+    if(array_key_exists('accepted_via', $info) && $confirmationStatus == 1){
+        $statusLabel .= ' (via '.$info['accepted_via'].')';
+    }elseif(array_key_exists('rejected_via', $info) && $confirmationStatus == 2){
+        $statusLabel .= ' (via '.$info['rejected_via'].')';
+    }
+
+?>
+<div style="float:left;width:100%;">
+    <div class="content" style="padding:0">
+        <div class="entry-edit-head"><h4 class="icon-head head-edit-form fieldset-legend">Confirmation Information</h4></div>
+        <div class="subcontent" style="padding:20px">
+            <table class="datax" cellpadding="0" cellspacing="7">
+                <tr class="rowx">
+                    <td class="titlex">Confirmation ID</th>
+                    <td class="datax"><?php echo $confirmation->getId() ? $confirmation->getId() : 'N/A'; ?></td>
+                    <td class="titlex">Confirmation Date</td>
+                    <td class="datax"><?php echo Mage::app()->getLocale()->date(strtotime($confirmation->getConfirmationDate()), null, null, false)->toString('dd/MM/yyyy') ?></td>
+                    <td class="titlex">Transfer Date</td>
+                    <td class="datax"><?php echo Mage::app()->getLocale()->date(strtotime($confirmation->getTransferDate()), null, null, false)->toString('dd/MM/yyyy') ?></td>
+                </tr>
+                <tr class="rowx">
+                    <td class="titlex">Shop Code</td>
+                    <td class="datax"><?php echo $confirmation->getShopCode() ? $confirmation->getShopCode() : 'N/A'; ?></td>
+                    <td class="titlex">Receipt No</td>
+                    <td class="datax"><?php echo $confirmation->getReceiptNo() ? $confirmation->getReceiptNo() : 'N/A'; ?></td>
+                    <td class="titlex">Cashier Name</td>
+                    <td class="datax"><?php echo $confirmation->getCashierName() ? $confirmation->getCashierName() : 'N/A'; ?></td>
+                </tr>
+                <tr class="rowx">    
+                    <td class="titlex">Buyer Information</td>
+                    <td class="datax">
+                        <?php $buyerInfo = ''; ?>
+                        <?php $buyerInfo = $confirmation->getBuyerName() ? $confirmation->getBuyerName().'<br>' : ''; ?>
+                        <?php $buyerInfo .= $confirmation->getBuyerEmail() ? $confirmation->getBuyerEmail().'<br>' : ''; ?>
+                        <?php $buyerInfo .= $confirmation->getBuyerPhone() ? $confirmation->getBuyerPhone().'<br>' : ''; ?>
+                        <?php echo $buyerInfo ? $buyerInfo : 'N/A'; ?>
+                    </td>
+                    <td class="titlex">Transfer Amount</td>
+                    <td class="datax"><?php echo $confirmation->getTransferAmount() ? number_format($confirmation->getTransferAmount(), 0) : 'N/A'; ?></td>
+                    <td class="titlex">Status</td>
+                    <td class="datax" colspan="5"><?php echo $statusLabel ?></td>
+                </tr>
+                <tr class="rowx">
+                    <td class="titlex">Notes</td>
+                    <td class="datax" colspan="5"><?php echo $confirmation->getNotes() ? $confirmation->getNotes() : 'N/A'; ?></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="entry-edit-head"><h4 class="icon-head head-edit-form fieldset-legend">Order Information</h4></div>
+        <div class="subcontent" style="padding:20px">
+            <table class="datax" cellpadding="0" cellspacing="7">
+                <tr class="rowx">
+                    <td class="titlex">Order ID</th>
+                    <td class="datax"><?php echo $confirmation->getOrderId() ? $confirmation->getOrderId() : 'N/A'; ?></td>
+                    <td class="titlex">Order Total</td>
+                    <td class="datax"><?php echo $order->getGrandTotal() ? number_format($order->getGrandTotal(), 0) : 'N/A'; ?></td>
+                    <td class="titlex">Shipping Method</td>
+                    <td class="datax"><?php echo $order->getShippingDescription() ? $order->getShippingDescription() : 'N/A'; ?></td>
+                </tr>
+                <tr class="rowx">
+                    <td class="titlex">Payment Method</td>
+                    <?php if($bankAccount): ?>
+                    <td class="datax">
+                        <?php echo $paymentMethod ? '<p>'.$paymentMethod.'</p>' : '<p>N/A</p>'; ?>
+                    </td>
+                    <td class="titlex">Bank Account</td>
+                    <td class="datax" colspan="3">
+                        <?php echo $bankAccount ? Mage::getModel('banktransferaccount/bank')->getBankLabel($bankAccount) : ''; ?>
+                    </td>
+                    <?php else: ?>
+                    <td class="datax" colspan="5">
+                        <?php echo $paymentMethod ? '<p>'.$paymentMethod.'</p>' : '<p>N/A</p>'; ?>
+                    </td>
+                    <?php endif; ?>
+                </tr>
+            </table>
+        </div>
+
+        <div class="entry-edit-head"><h4 class="icon-head head-edit-form fieldset-legend">Customer Information</h4></div>
+        <div class="subcontent" style="padding:20px">
+            <table class="datax" cellpadding="0" cellspacing="7">
+                <tr class="rowx">
+                    <td class="titlex">Customer ID</th>
+                    <td class="datax"><?php echo $confirmation->getCustomerId() ? $confirmation->getCustomerId() : 'N/A'; ?></td>
+                    <td class="titlex">Customer Email</td>
+                    <td class="datax"><?php echo $confirmation->getCustomerEmail() ? $confirmation->getCustomerEmail() : 'N/A'; ?></td>
+                </tr>
+                <?php if(Mage::helper('paymentconfirmation/data')->isShowPrefix()): ?>
+                <tr class="rowx">
+                    <td class="titlex">Prefix</td>
+                    <td class="datax"><?php echo $_customer->getPrefix() ? $_customer->getPrefix() : 'N/A'; ?></td>
+                    <td class="titlex">Customer Name</td>
+                    <td class="datax" colspan="3"><?php echo $confirmation->getCustomerName() ? $confirmation->getCustomerName() : 'N/A'; ?></td>
+                </tr>
+                
+                <?php else: ?>
+                <tr class="rowx">
+                    <td class="titlex">Customer Name</td>
+                    <td class="datax" colspan="5"><?php echo $confirmation->getCustomerName() ? $confirmation->getCustomerName() : 'N/A'; ?></td>
+                </tr>
+                <?php endif; ?>
+                <?php /*
+                <tr class="rowx">
+                    <td class="titlex">Default Billing Address</td>
+                    <td class="datax" colspan="5">
+                        <?php echo $billingAddress->getPrefix() ? '<p>'.$billingAddress->getPrefix().' ' : '<p>'; ?>
+                        <?php echo $billingAddress->getFirstname() ? $billingAddress->getFirstname().' ' : ''; ?>
+                        <?php echo $billingAddress->getLastname() ? $billingAddress->getLastname().'  '.'</p>' : '</p>'; ?>
+                        <?php echo $billingAddress->getCompany() ? '<p>'.$billingAddress->getCompany().'</p>' : '</p>'; ?>
+                        <?php echo $billingStreet1 ? '<p>'.$billingStreet1.'</p>' : '</p>'; ?>
+                        <?php echo $billingStreet2 ? '<p>'.$billingStreet2.'</p>' : '</p>'; ?>
+                        <?php echo $billingAddress->getCity() ? '<p>'.$billingAddress->getCity().', ' : ''; ?>
+                        <?php echo $billingAddress->getRegion() ? $billingAddress->getRegion().', ' : ''; ?>
+                        <?php echo $billingAddress->getPostcode() ? $billingAddress->getPostcode().'</p>' : '</p>'; ?>
+                        <?php echo $billingAddress->getTelephone() ? '<p>T: '.$billingAddress->getTelephone().'</p>' : '</p>'; ?>
+                        <?php echo $billingAddress->getFax() ? '<p>F: '.$billingAddress->getFax().'</p>' : '</p>'; ?>
+                    </td>
+                </tr>
+                <tr class="rowx">
+                    <td class="titlex">Default Shipping Address</td>
+                    <td class="datax" colspan="5"><?php echo Mage::getModel('paymentconfirmation/confirmation')->getStatusLabel($confirmation->getStatus()) ?></td>
+                </tr>
+                */ ?>
+            </table>
+        </div>
+        
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+    <modules>
+        <Mamoku_RegAddress>
+            <version>1.0.0</version>
+        </Mamoku_RegAddress>
+    </modules>
+
+    <default>
+        <regaddress>
+            <defaultconfiguration>
+                <extendedregistration>optional_address</extendedregistration>
+            </defaultconfiguration>
+        </regaddress>
+    </default>
+
+    <global>
+        <blocks>
+            <mamoku_regaddress>
+                <class>Mamoku_RegAddress_Block</class>
+            </mamoku_regaddress>
+            <customer>
+                <rewrite>
+                    <form_register>Mamoku_RegAddress_Block_Form_Register</form_register>
+                </rewrite>
+            </customer>
+        </blocks>
+        <models>
+            <mamoku_regaddress>
+                <class>Mamoku_RegAddress_Model</class>
+            </mamoku_regaddress>
+        </models>
+        <helpers>
+            <mamoku_regaddress>
+                <class>Mamoku_RegAddress_Helper</class>
+            </mamoku_regaddress>
+        </helpers>
+    </global>
+    
+    <frontend>
+        <layout>
+            <updates>
+                <mamoku_regaddress>
+                    <file>mamoku_regaddress.xml</file>
+                </mamoku_regaddress>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Mamoku_RegAddress>
+                    <files>
+                        <default>Mamoku_RegAddress.csv</default>
+                    </files>
+                </Mamoku_RegAddress>
+            </modules>
+        </translate>
+    </frontend>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <Mamoku_RegAddress>
+                    <files>
+                        <default>Mamoku_RegAddress.csv</default>
+                    </files>
+                </Mamoku_RegAddress>
+            </modules>
+        </translate>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <regaddress>
+                                            <title>DESIGN:SLIDER Registration Address</title>
+                                        </regaddress>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+
+</config>

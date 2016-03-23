@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <api>
+        <resources>
+            <multistockpoint_api translate="title" module="multistockpoint">
+                <title>Myapi</title>
+                <acl>multistockpoint/api</acl>
+                <model>multistockpoint/api</model>
+                <methods>                    
+						<test translate="title" module="multistockpoint">
+							<title>test</title>
+							<acl>multistockpoint/test</acl>
+						</test>
+                </methods>
+            </multistockpoint_api>
+        </resources>
+        <acl>
+            <resources>
+                <multistockpoint translate="title" module="multistockpoint">
+                    <title>Multistockpoint</title>
+                    <sort_order>2000</sort_order>                    
+					<test translate="title" module="multistockpoint">
+                        <title>test</title>
+                    </test>
+                </multistockpoint>
+            </resources>
+        </acl>
+    </api>
+</config>

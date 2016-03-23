@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mamoku_BankTransferAccount>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Mamoku_BankTransferAccount>
+    </modules>
+</config> 

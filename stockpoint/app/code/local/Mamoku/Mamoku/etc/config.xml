@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mamoku_Mamoku>
+            <version>0.1.0</version>
+        </Mamoku_Mamoku>        
+    </modules>
+    <adminhtml>
+        <layout>
+            <updates>
+                <mamoku>
+                    <file>mamoku.xml</file>
+                </mamoku>
+            </updates>
+        </layout>        
+    </adminhtml>
+    <global>
+        <helpers>
+            <mamoku>
+                <class>Mamoku_Mamoku_Helper</class>
+            </mamoku>
+        </helpers>
+    </global>
+</config>

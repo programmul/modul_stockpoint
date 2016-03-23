@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    Mamoku
+ * @package     Mamoku_BankTransferAccount
+ * @copyright   Copyright (c) 2015 Mamoku Services (http://www.mamoku.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/**
+ * Installer to create table ks_bank_transfer_account
+ *
+ * @author      Team Mamoku <info@mamoku.com>
+ */
+ -->
+<config>
+    <menu>  
+        <mamoku translate="title" module="mamoku">
+            <children>
+                    <bank_transfer_account translate="title" module="banktransferaccount">
+                    <title>Bank Transfer Account</title>
+                    <sort_order>10</sort_order>
+                    <action>banktransferaccount/adminhtml_bank/index</action>
+                </bank_transfer_account>
+            </children>
+            
+        </mamoku>          
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <bank_transfer_account translate="title" module="banktransferaccount">
+                                        <title>Bank Transfer Account</title>
+                                        <sort_order>620</sort_order>
+                                    </bank_transfer_account>
+                                </children>
+                            </config>
+                        </children>
+                    </system>                    
+                    <bank_transfer_account translate="title">
+                        <title>Manage Bank Accounts</title>
+                        <sort_order>10</sort_order>
+                        <children>
+                            <actions translate="title">
+                                <title>Actions</title>
+                                <children>
+                                    <view translate="title"><title>View Bank Account</title><sort_order>10</sort_order></view>
+                                    <edit translate="title"><title>Edit Bank Account</title><sort_order>20</sort_order></edit>
+                                    <add translate="title"><title>Add Bank Account</title><sort_order>30</sort_order></add>
+                                </children>
+                            </actions>
+                        </children>
+                    </bank_transfer_account>                        
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
