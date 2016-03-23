@@ -8,7 +8,7 @@ function get($param) {
                 ->addAttributeToFilter('created_at', array('gt' => $param->date));
         $orderpaid = array();
         $i = 0;
-        foreach ($order->getData() as $value) {
+        foreach ($order as $value) {
             $orderpaid[$i]['no_order'] = $value['increment_id'];
             $orderpaid[$i]['entity_id'] = $value['entity_id'];
             $orderpaid[$i]['created_at'] = $value['created_at'];
@@ -20,28 +20,46 @@ function get($param) {
             $orderpaid[$i]['customer_lastname'] = $value['customer_lastname'];
             $payment = new Mage_Sales_Model_Order();
             $payment->loadByIncrementId($value['increment_id']);
+
+	    $orderpaid[$i]['shipping_address_id']=$value['shipping_address_id'];
+	    $orderpaid[$i]['billing_address_id']=$value['billing_address_id'];
+	    $orderpaid[$i]['shippingaddress_id']=$value->getshipping_address_id();
+		
+           
+
+
+
             $orderpaid[$i]['payment_method'] = $payment->getPayment()->getMethodInstance()->getTitle();
-$orderpaid[$i]['shipping_address_id']=$value['shipping_address_id'];
-$orderpaid[$i]['billing_address_id']=$value['billing_address_id'];
-
-            $address = Mage::getModel('sales/order_address')->load($value['shipping_address_id']);
+            $address = Mage::getModel('customer/address')->load($orderpaid[$i]['shipping_address_id']);
             $orderpaid[$i]['shipping_address_detail'] = [
-		'shipping_address_id' => $address->getCustomerAddressId(),
+                'outlet_name' => $address->getCompany(),
+                'firstname' => $address->getFirstname(),
+                'lastname' => $address->getLastname(),
                 'shipping_address' => $address->getStreetFull(),
-                'phone' => $address->getTelephone(),
+                'telephone' => $address->getTelephone(),
                 'region' => $address->getRegion(),
+                'kota' => $address->getCity(),
+                'kecamatan' => $address->getKecamatan(),
+                'kelurahan' => $address->getKelurahan(),
+                'postcode' => $address->getPostcode(),
                 'email' => $address->getEmail(),
-'Kecamatan' => $address->getKecamatan()
+                'stockpointcode' => $address->getStockpointcode()
             ];
-            $billing = Mage::getModel('sales/order_address')->load($value['billing_address_id']);
+            $billing=Mage::getModel('customer/address')->load($orderpaid[$i]['billing_address_id']);
             $orderpaid[$i]['billing_address_detail'] = [
-'shipping_address_id' => $billing['customer_address_id'],
+                'outlet_name' => $billing->getCompany(),
+                'firstname' => $billing->getFirstname(),
+                'lastname' => $billing->getLastname(),
                 'billing_address' => $billing->getStreetFull(),
-                'phone' => $billing->getTelephone(),
+                'telephone' => $billing->getTelephone(),
                 'region' => $billing->getRegion(),
-                'email' => $billing->getEmail()
+                'kota' => $billing->getCity(),
+                'kecamatan' => $billing->getKecamatan(),
+                'kelurahan' => $billing->getKelurahan(),
+                'postcode' => $billing->getPostcode(),
+                'email' => $billing->getEmail(),
+                'stockpointcode' => $billing->getStockpointcode()
             ];
-
             $order = Mage::getModel('sales/order')->loadByIncrementId($orderpaid[$i]['no_order']);
             $items = $order->getAllVisibleItems();
             $itemcount = count($items);
@@ -83,19 +101,38 @@ $orderpaid[$i]['billing_address_id']=$value['billing_address_id'];
             $payment = new Mage_Sales_Model_Order();
             $payment->loadByIncrementId($value['increment_id']);
             $orderpaid[$i]['payment_method'] = $payment->getPayment()->getMethodInstance()->getTitle();
-            $address = Mage::getModel('sales/order_address')->load($value['shipping_address_id']);
+            $address = Mage::getModel('customer/address')->load($value['shipping_address_id']);
+            
+           
+            
             $orderpaid[$i]['shipping_address_detail'] = [
+                'outlet_name' => $address->getCompany(),
+                'firstname' => $address->getFirstname(),
+                'lastname' => $address->getLastname(),
                 'shipping_address' => $address->getStreetFull(),
-                'phone' => $address->getTelephone(),
+                'telephone' => $address->getTelephone(),
                 'region' => $address->getRegion(),
-                'email' => $address->getEmail()
+                'kota' => $address->getCity(),
+                'kecamatan' => $address->getKecamatan(),
+                'kelurahan' => $address->getKelurahan(),
+                'postcode' => $address->getPostcode(),
+                'email' => $address->getEmail(),
+                'stockpointcode' => $address->getStockpointcode()
             ];
-            $billing = Mage::getModel('sales/order_address')->load($value['billing_address_id']);
+            $billing=Mage::getModel('customer/address')->load($value['billing_address_id']);
             $orderpaid[$i]['billing_address_detail'] = [
+                'outlet_name' => $billing->getCompany(),
+                'firstname' => $billing->getFirstname(),
+                'lastname' => $billing->getLastname(),
                 'billing_address' => $billing->getStreetFull(),
-                'phone' => $billing->getTelephone(),
+                'telephone' => $billing->getTelephone(),
                 'region' => $billing->getRegion(),
-                'email' => $billing->getEmail()
+                'kota' => $billing->getCity(),
+                'kecamatan' => $billing->getKecamatan(),
+                'kelurahan' => $billing->getKelurahan(),
+                'postcode' => $billing->getPostcode(),
+                'email' => $billing->getEmail(),
+                'stockpointcode' => $billing->getStockpointcode()
             ];
 
             $order = Mage::getModel('sales/order')->loadByIncrementId($orderpaid[$i]['no_order']);
