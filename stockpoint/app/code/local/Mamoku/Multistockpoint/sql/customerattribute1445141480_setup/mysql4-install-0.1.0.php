@@ -285,7 +285,7 @@ $installer->addAttribute("customer", "outlet_type",  array(
     "backend"  => "",
     "label"    => "outlet_type",
     "input"    => "select",
-    "source"   => "multistockpoint/eav_entity_attribute_source_customeroptionsoutletype",    
+    "source"   => "multistockpoint/eav_entity_attribute_source_customeroptionsoutlettype",    
     "visible"  => true,
     "required" => false,
     "default" => "",
