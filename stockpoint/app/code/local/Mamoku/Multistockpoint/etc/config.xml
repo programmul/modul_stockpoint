@@ -43,8 +43,24 @@
             </Mamoku_Multistockpoint_Model_Observer>
         </observers>
     </checkout_cart_save_after>    
-    
-    
+    <sales_order_place_after>
+			<observers>
+				<Mamoku_Multistockpoint_Model_Observer>
+					<type>singleton</type>
+					<class>Mamoku_Multistockpoint_Model_Observer</class>
+					<method>managestock</method>
+				</Mamoku_Multistockpoint_Model_Observer>
+			</observers>
+	</sales_order_place_after>
+    <checkout_cart_product_add_after>
+			<observers>
+				<Mamoku_Multistockpoint_Model_Observer>
+					<type>singleton</type>
+					<class>Mamoku_Multistockpoint_Model_Observer</class>
+					<method>addToCartStockChecking</method>
+				</Mamoku_Multistockpoint_Model_Observer>
+			</observers>
+	</checkout_cart_product_add_after>
 </events>
   <sales>
 	<order>
@@ -179,6 +195,17 @@
 	  </customerattribute1445141480_read>
   
 	</resources>
+	<events>
+		<catalog_product_collection_apply_limitations_after>
+			<observers>
+				<Mamoku_Multistockpoint_Observer>
+					<type>singleton</type>
+					<class>Mamoku_Multistockpoint_Model_Observer</class>
+					<method>Customfiltermethod</method>
+				</Mamoku_Multistockpoint_Observer>
+			</observers>
+		</catalog_product_collection_apply_limitations_after>
+	</events>
   </global>
 <frontend>
         <routers>
