@@ -133,7 +133,7 @@ $used_in_forms[]="adminhtml_checkout";
         $attribute->save();
 
 
-$installer->addAttribute("customer", "is_verified",  array(
+/*$installer->addAttribute("customer", "is_verified",  array(
     "type"     => "int",
     "backend"  => "",
     "label"    => "is_verified",
@@ -162,7 +162,7 @@ $used_in_forms[]="adminhtml_checkout";
 		->setData("is_visible", 1)
 		->setData("sort_order", 100)
 		;
-        $attribute->save();
+        $attribute->save();*/
 
 $installer->addAttribute("customer", "stockpoint_id",  array(
     "type"     => "int",

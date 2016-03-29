@@ -1,13 +1,15 @@
 <?php
 
 function get($param) {
-
+    $data = [];
+    $i = 0;
+    $j = 0;
     if ($param->status == "unpaid") {
         $order = Mage::getModel('sales/order')->getCollection()
                 ->addAttributeToFilter('status', ['status' => 'pending'])
                 ->addAttributeToFilter('created_at', array('gt' => $param->date));
         $orderpaid = array();
-        $i = 0;
+
         foreach ($order as $value) {
             $orderpaid[$i]['no_order'] = $value['increment_id'];
             $orderpaid[$i]['entity_id'] = $value['entity_id'];
@@ -20,46 +22,57 @@ function get($param) {
             $orderpaid[$i]['customer_lastname'] = $value['customer_lastname'];
             $payment = new Mage_Sales_Model_Order();
             $payment->loadByIncrementId($value['increment_id']);
-
-	    $orderpaid[$i]['shipping_address_id']=$value['shipping_address_id'];
-	    $orderpaid[$i]['billing_address_id']=$value['billing_address_id'];
-	    $orderpaid[$i]['shippingaddress_id']=$value->getshipping_address_id();
-		
-           
-
-
-
             $orderpaid[$i]['payment_method'] = $payment->getPayment()->getMethodInstance()->getTitle();
-            $address = Mage::getModel('customer/address')->load($orderpaid[$i]['shipping_address_id']);
-            $orderpaid[$i]['shipping_address_detail'] = [
-                'outlet_name' => $address->getCompany(),
-                'firstname' => $address->getFirstname(),
-                'lastname' => $address->getLastname(),
-                'shipping_address' => $address->getStreetFull(),
-                'telephone' => $address->getTelephone(),
-                'region' => $address->getRegion(),
-                'kota' => $address->getCity(),
-                'kecamatan' => $address->getKecamatan(),
-                'kelurahan' => $address->getKelurahan(),
-                'postcode' => $address->getPostcode(),
-                'email' => $address->getEmail(),
-                'stockpointcode' => $address->getStockpointcode()
-            ];
-            $billing=Mage::getModel('customer/address')->load($orderpaid[$i]['billing_address_id']);
-            $orderpaid[$i]['billing_address_detail'] = [
-                'outlet_name' => $billing->getCompany(),
-                'firstname' => $billing->getFirstname(),
-                'lastname' => $billing->getLastname(),
-                'billing_address' => $billing->getStreetFull(),
-                'telephone' => $billing->getTelephone(),
-                'region' => $billing->getRegion(),
-                'kota' => $billing->getCity(),
-                'kecamatan' => $billing->getKecamatan(),
-                'kelurahan' => $billing->getKelurahan(),
-                'postcode' => $billing->getPostcode(),
-                'email' => $billing->getEmail(),
-                'stockpointcode' => $billing->getStockpointcode()
-            ];
+            $orderpaid[$i]['shipping_address_id'] = $value['shipping_address_id'];
+            $orderpaid[$i]['billing_address_id'] = $value['billing_address_id'];
+            $orderpaid[$i]['shippingaddress_id'] = $value->getshipping_address_id();
+            
+            $addressshipping = Mage::getModel('sales/order_address')->load($value['shipping_address_id']);
+            $address_shipping = Mage::getModel('customer/customer')->load($orderpaid[$i]['customer_id']);
+            foreach ($address_shipping->getAddresses() as $alamat) {
+                if ($addressshipping->getStreetFull() == $alamat->getStreetFull()) {
+                    $orderpaid[$i]['shipping_address_detail'] = [
+                        'outlet_name' => $alamat->getCompany(),
+                        'firstname' => $alamat->getFirstname(),
+                        'lastname' => $alamat->getLastname(),
+                        'shipping_address' => $alamat->getStreetFull(),
+                        'telephone' => $alamat->getTelephone(),
+                        'region' => $alamat->getRegion(),
+                        'kota' => $alamat->getCity(),
+                        'kecamatan' => $alamat->getKecamatan(),
+                        'kelurahan' => $alamat->getKelurahan(),
+                        'postcode' => $alamat->getPostcode(),
+                        'email' => $alamat->getEmail(),
+                        'stockpointcode' => $alamat->getStockpointcode()
+                    ];
+                    $j++;
+                }
+            }
+            
+            $addressbilling = Mage::getModel('sales/order_address')->load($value['billing_address_id']);
+            $address_billing = Mage::getModel('customer/customer')->load($orderpaid[$i]['customer_id']);
+            foreach ($address_billing->getAddresses() as $billing) {
+                if ($addressbilling->getStreetFull() == $billing->getStreetFull()) {
+                    $orderpaid[$i]['billing_address_detail'] = [
+                        'outlet_name' => $billing->getCompany(),
+                        'firstname' => $billing->getFirstname(),
+                        'lastname' => $billing->getLastname(),
+                        'billing_address' => $billing->getStreetFull(),
+                        'telephone' => $billing->getTelephone(),
+                        'region' => $billing->getRegion(),
+                        'kota' => $billing->getCity(),
+                        'kecamatan' => $billing->getKecamatan(),
+                        'kelurahan' => $billing->getKelurahan(),
+                        'postcode' => $billing->getPostcode(),
+                        'email' => $billing->getEmail(),
+                        'stockpointcode' => $billing->getStockpointcode()
+                    ];
+                    $j++;
+                }
+            }
+            
+            
+           
             $order = Mage::getModel('sales/order')->loadByIncrementId($orderpaid[$i]['no_order']);
             $items = $order->getAllVisibleItems();
             $itemcount = count($items);
@@ -82,6 +95,7 @@ function get($param) {
             $orderpaid[$i]['grand_total'] = $value['base_grand_total'];
             $i++;
         }
+           
     }if ($param->status == "paid") {
         $collection = Mage::getModel('sales/order')->getCollection()
                 ->addAttributeToFilter('status', ['in' => ['processing', 'complete']]);
@@ -102,38 +116,52 @@ function get($param) {
             $payment->loadByIncrementId($value['increment_id']);
             $orderpaid[$i]['payment_method'] = $payment->getPayment()->getMethodInstance()->getTitle();
             $address = Mage::getModel('customer/address')->load($value['shipping_address_id']);
+
+
+
+            $addressshipping = Mage::getModel('sales/order_address')->load($value['shipping_address_id']);
+            $address_shipping = Mage::getModel('customer/customer')->load($orderpaid[$i]['customer_id']);
+            foreach ($address_shipping->getAddresses() as $alamat) {
+                if ($addressshipping->getStreetFull() == $alamat->getStreetFull()) {
+                    $orderpaid[$i]['shipping_address_detail'] = [
+                        'outlet_name' => $alamat->getCompany(),
+                        'firstname' => $alamat->getFirstname(),
+                        'lastname' => $alamat->getLastname(),
+                        'shipping_address' => $alamat->getStreetFull(),
+                        'telephone' => $alamat->getTelephone(),
+                        'region' => $alamat->getRegion(),
+                        'kota' => $alamat->getCity(),
+                        'kecamatan' => $alamat->getKecamatan(),
+                        'kelurahan' => $alamat->getKelurahan(),
+                        'postcode' => $alamat->getPostcode(),
+                        'email' => $alamat->getEmail(),
+                        'stockpointcode' => $alamat->getStockpointcode()
+                    ];
+                    $j++;
+                }
+            }
             
-           
-            
-            $orderpaid[$i]['shipping_address_detail'] = [
-                'outlet_name' => $address->getCompany(),
-                'firstname' => $address->getFirstname(),
-                'lastname' => $address->getLastname(),
-                'shipping_address' => $address->getStreetFull(),
-                'telephone' => $address->getTelephone(),
-                'region' => $address->getRegion(),
-                'kota' => $address->getCity(),
-                'kecamatan' => $address->getKecamatan(),
-                'kelurahan' => $address->getKelurahan(),
-                'postcode' => $address->getPostcode(),
-                'email' => $address->getEmail(),
-                'stockpointcode' => $address->getStockpointcode()
-            ];
-            $billing=Mage::getModel('customer/address')->load($value['billing_address_id']);
-            $orderpaid[$i]['billing_address_detail'] = [
-                'outlet_name' => $billing->getCompany(),
-                'firstname' => $billing->getFirstname(),
-                'lastname' => $billing->getLastname(),
-                'billing_address' => $billing->getStreetFull(),
-                'telephone' => $billing->getTelephone(),
-                'region' => $billing->getRegion(),
-                'kota' => $billing->getCity(),
-                'kecamatan' => $billing->getKecamatan(),
-                'kelurahan' => $billing->getKelurahan(),
-                'postcode' => $billing->getPostcode(),
-                'email' => $billing->getEmail(),
-                'stockpointcode' => $billing->getStockpointcode()
-            ];
+            $addressbilling = Mage::getModel('sales/order_address')->load($value['billing_address_id']);
+            $address_billing = Mage::getModel('customer/customer')->load($orderpaid[$i]['customer_id']);
+            foreach ($address_billing->getAddresses() as $billing) {
+                if ($addressbilling->getStreetFull() == $billing->getStreetFull()) {
+                    $orderpaid[$i]['billing_address_detail'] = [
+                        'outlet_name' => $billing->getCompany(),
+                        'firstname' => $billing->getFirstname(),
+                        'lastname' => $billing->getLastname(),
+                        'billing_address' => $billing->getStreetFull(),
+                        'telephone' => $billing->getTelephone(),
+                        'region' => $billing->getRegion(),
+                        'kota' => $billing->getCity(),
+                        'kecamatan' => $billing->getKecamatan(),
+                        'kelurahan' => $billing->getKelurahan(),
+                        'postcode' => $billing->getPostcode(),
+                        'email' => $billing->getEmail(),
+                        'stockpointcode' => $billing->getStockpointcode()
+                    ];
+                    $j++;
+                }
+            }
 
             $order = Mage::getModel('sales/order')->loadByIncrementId($orderpaid[$i]['no_order']);
             $items = $order->getAllVisibleItems();

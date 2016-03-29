@@ -5,7 +5,7 @@
 			$upload = "../media/catalog/product/". $_FILES['myimage']['name'];
 			move_uploaded_file($_FILES['myimage']['tmp_name'], $upload);
 		}
-		/*cobadong*/
+		
 		//echo 'hallo';
 ?>
 
