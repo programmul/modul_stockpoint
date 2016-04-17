@@ -1,8 +1,133 @@
+<!-- Get order JS -->
 
- <head>
+
+<script>
+var ajaxku;
+var u = "<?php echo $this->getBaseUrl();?>";
+var loc = u.replace('index.php/','');
+function ajaxid_customer_email  (id_increment){
+    ajaxku = buatajax();    
+    var url= loc + "ambil_order.php";
+    url=url+"?id_increment="+id_increment;
+    //url=url+"&sid="+Math.random();
+    ajaxku.onreadystatechange=stateChanged;
+    ajaxku.open("GET",url,true);
+    ajaxku.send(null);
+}
+
+function buatajax(){
+    if (window.XMLHttpRequest){
+    return new XMLHttpRequest();
+    }
+    if (window.ActiveXObject){
+    return new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    return null;
+}
+
+
+function stateChanged(){
+    var data;
+    if (ajaxku.readyState==4){
+    data=ajaxku.responseText;
+    if(data.length>=0){
+    //document.getElementById("id_customer_email").innerHTML = data;
+    var str = data;
+    var res = str.split("|");
+        
+    $('input[name="duit"]').val(res[1]);
+    $('input[name="mail"]').val(res[0]);
+    }else{
+    document.getElementById("id_customer_email").value = "<option selected>Pilih customer_email/Kab</option>";
+    }
+    }
+}
+
+
+function validateForm() {
+
+    var emailinput  = $('input[name="email"').val();
+    var transferinput   = (Number($('input[name="jumlahtransfer"]').val().replace(/[^0-9\.]+/g,"")));
+    var noorderinput = $('input[name="noorder"').val();
+    var namainput = $('input[name="nama"').val();
+    var bankbuyerinput = $('input[name="bankbuyer"').val();
+    var rekbuyerinput = $('input[name="rekbuyer"').val();
+    var banktujuaninput = $('input[name="banktujuan"').val();
+    var metodetransferinput = $('input[name="metodetransfer"').val();
+    var datetimelocalinput = $('input[name="datetime-local"').val();
+   
+
+
+
+
+
+
+
+    var hiddenamount    = parseInt($('input[name="duit"]').val());
+    var hiddenemail     = $('input[name="mail"]').val();
+    //alert(hiddenemail+' '+emailinput);
+
+ 
+        if (hiddenemail === ''){
+        alert('Pastikan No Order anda benar');
+        document.konfirmasipembayaranform.noorder.focus() ;
+            
+
+            return false;
+/*    }  if (hiddenamount < transferinput){
+        alert('Jumlah yang anda masukan kebesaran');
+        document.konfirmasipembayaranform.noorder.focus() ;
+            return false;
+     }  if (hiddenamount > transferinput){
+        alert('Jumlah yang anda masukan kecil');
+        document.konfirmasipembayaranform.noorder.focus() ;
+            return false;*/
+
+    }  if (hiddenamount !== transferinput){
+        alert('Pastikan Total Transfer yang anda masukan Sesuai dengan no order');
+        document.konfirmasipembayaranform.jumlahtransfer.focus() ;
+            return false;
+
+
+
+    }   if (hiddenemail !== emailinput){
+        alert('Pastikan alamat email anda benar');
+        document.konfirmasipembayaranform.email.focus() ;
+        
+            return false;
     
 
+}   if (namainput === ''){
+        alert('Nama Pengirim Wajib di isi');
+        document.konfirmasipembayaranform.nama.focus() ;
+            return false;
 
+    }   if (bankbuyerinput === ''){
+        alert('Nama bank pengirim Wajib di isi');
+        document.konfirmasipembayaranform.bankbuyer.focus() ;
+            return false;
+
+    }   if (rekbuyerinput === ''){
+        alert('No Rekening pengirim  Wajib di isi');
+        document.konfirmasipembayaranform.rekbuyer.focus() ;
+            return false;
+            
+//    }   if (banktujuaninput !== null){
+//        alert('bank tujuan  Wajib di pilih');
+//        document.konfirmasipembayaranform.banktujuan.focus() ;
+//            return false;
+
+    } 
+        return validateForm();
+        return true;
+
+}
+
+</script>
+<!-- end Get order JS -->
+
+<!-- Currency js-->
+<script type="text/javascript" charset="utf-8" src=" ../js/konfirmasipembayaran.min.js"></script>
 
     <script type="text/javascript" charset="utf-8" src="../js/jquery-currency-input.js"></script>
     <script type="text/javascript" charset="utf-8">
@@ -13,15 +138,9 @@
             });
           });
     </script>
-  </head>
-<style type="text/css">
-    .validation-advice {
-position: static;
-    display: inline-block;
-    border-width: 1px;
-    padding: 2px 5px 1px 6px;
-}
-</style>
+<!-- end Currency js-->
+
+
 <div class="account-create">
     <div class="page-title">
         <h1><?php echo $this->__('Konfiirmasi Pembayaran') ?></h1>
@@ -32,33 +151,45 @@ position: static;
     <?php /* Extensions placeholder */ ?>
 
 <div class="awbali_formwrapper">
-	<form method="post" name="konfirmasipembayaranform" id="konfirmasipembayaranform" action="<?php echo Mage::getBaseUrl();?>konfirmasipembayaran/index/post">
-    	<div class="page-title">
+    <form method="post" name="konfirmasipembayaranform" id="konfirmasipembayaranform" onsubmit="return validateForm()" action="<?php echo Mage::getBaseUrl();?>konfirmasipembayaran/index/post">
+        <div class="page-title">
         <h3><?php echo $this->__('Data Order') ?></h3>
     </div>
             <ul class="form-list">
 
- 
+
+
+
+
        <li class="fields">
         <div class="field">
             <label class="required"> No.Order<em>*</em></label>
             <div class="input-box">
-                <input type="text" class="input-text required-noorder validate-noorder" name="noorder" placeholder="No order pesanan anda" />
+                <input type="text" class="input-text required-entry validate-number" onchange="ajaxid_customer_email(this.value)" name="noorder" placeholder="No order pesanan anda" />
             </div>
          <div class="field">    
         </li>
-            
 
-          
 
-        <li class="fields">
+                <li class="fields">
         <div class="field">
             <label class="required">Jumlah Transfer<em>*</em></label>
             <div class="input-box">
-            <input type="currency"   class="input-text required-jumlahtransfer" name="jumlahtransfer" placeholder="Tuliskan jumlah dana yang di transfer"/>
+            <input type="currency"   class="input-text required-entry" name="jumlahtransfer" placeholder="Tuliskan jumlah dana yang di transfer"/>
              </div>
          <div class="field">    
         </li>
+
+
+
+       
+            <!-- data hiden -->
+
+
+          
+</div>
+
+
        
        <br>
        <div class="page-title">
@@ -70,7 +201,7 @@ position: static;
         <div class="field">
             <label class="required">Nama<em>*</em></label>
             <div class="input-box">
-            <input type="text" class="input-text required-namapengirim" name="nama" placeholder="Nama yang tertera pada buku bank"/> 
+            <input type="text" class="input-text required-entry" name="nama" placeholder="Nama yang tertera pada buku bank"/> 
             </div>
         
              
@@ -81,7 +212,7 @@ position: static;
         <div class="field">
             <label class="required">Email<em>*</em></label>
             <div class="input-box">
-            <input type="text" class="input-text required-emailpengirim validate-email" name="email" placeholder="Masukan email, contoh : email@example.com" />
+            <input type="text" class="input-text required-entry validate-email" name="email" placeholder="Masukan email, contoh : email@example.com" />
             </div>
             </div>
             </li>
@@ -91,20 +222,38 @@ position: static;
             <input type="text" class="awbali_input required-entry" name="bankbuyer" />
             <div class="clear"></div>
         </div> -->
+        
  <li class="fields">
-         <div class="field">
+        <div class="field">
             <label class="required">Nama Bank Pengirim<em>*</em></label>
-            <div class "input-box">   
-            <input type="text" class="input-text required-namabankpengirim" name="bankbuyer"placeholder="Nama Bank Pengirim" />
+            <div class="input-box">
+            <input type="text" class="input-text required-entry" name="bankbuyer" placeholder="Masukan Nomor Rekening anda" />
             </div>
             </div>
             </li>
+
+
+
+
+        <!-- <li class="fields">
+         <div class="field">
+            <label class="required">Nama Bank Pengirim<em>*</em></label>
+            <select name="bankbuyer" class="selectaddr.button validate-select">
+                <option value="">Pilih Bank Pengirim</option>
+                <option value="BCA">BCA </option>
+                <option value="Mandiri">Mandiri </option>
+                <option value="BRI">BRI</option>
+                <option value="CIMB NIAGA">CIMB NIAGA </option>
+                <option value="BNI">BNI</option>
+            </select>
+            </div>
+            </li> -->
 
         <li class="fields">
          <div class="field">
             <label class="required">No. Rekening Pengirim<em>*</em></label>
             <div class "input-box">   
-            <input type="text" class="input-text required-norekpengirim" name="rekbuyer"placeholder="Nomor rekening anda" />
+            <input type="text" class="input-text required-entry" name="rekbuyer"placeholder="Nomor rekening anda" />
             </div>
             </div>
             </li>
@@ -133,7 +282,7 @@ position: static;
         <div class="field">
             <label class="required">Metode Transfer<em>*</em></label>
             <select name="metodetransfer" class="selectaddr.button validate-select">
-            	<option value="">Pilih Metode Transfer</option>
+                <option value="">Pilih Metode Transfer</option>
                 <option value="Setoran Tunai">Setoran Tunai</option>
                 <option value="ATM">ATM</option>
                 <option value="Internet Banking">Internet Banking</option>
@@ -145,11 +294,11 @@ position: static;
        <li class="fields">
        <div class="field">
             <label class="required">Tanggal Transfer<em>*</em></label>
-            <input type="date" class="input-text required-entry" name="tanggaltransfer" placeholder="DD-MM-YYYY" />
+            <input type="datetime-local" class="input-text required-entry" name="tanggaltransfer" placeholder="DD-MM-YYYY" />
             </div>
 
-         <!--  </li>
-  <li class="fields">
+          </li>
+<!--  <li class="fields">
         <div class="field">
             <label class="required"> Coba Tambah<em>*</em></label>
             <div class="input-box">
@@ -164,18 +313,35 @@ position: static;
             <li>
 
             <input type="file" name="customerimg"  value="" class="btn" />
-            </li>
+            </li>-->
         </div>
 
-          </li> -->
+          </li>
 
 
         <li class="fields">
        <div class="field">
-        <input type="submit" value="Konfirmasi" class="btn" />
+        <input type="submit" value="Konfirmasi" class="btn" >
         </div>
         </li>
-</div>
+        
+         <li class="fields">
+        <div class="field">
+           <!-- data hiden -->
+            <div class="input-box">
+                <input type="hidden"  class="input-text" disabled name="mail" value="" />
+            </div>
+         <div class="field">    
+        </li>
+
+        <li class="fields">
+        <div class="field">
+            
+            <div class="input-box">
+                <input type="hidden" class="input-text" disabled name="duit" value="" />
+            </div>
+         <div class="field">    
+        </li>
 </div>
 
 
@@ -185,5 +351,8 @@ position: static;
 <script type="text/javascript">
     //< ![CDATA[
         var customForm = new VarienForm('konfirmasipembayaranform');
+        $('input[type="submit"]').attr('disabled', 'disabled');
     //]]>
+
+
 </script>
