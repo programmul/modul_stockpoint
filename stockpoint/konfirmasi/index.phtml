@@ -1,0 +1,189 @@
+
+ <head>
+    
+
+
+
+    <script type="text/javascript" charset="utf-8" src="../js/jquery-currency-input.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      $(function(){
+          $('form').submit(function(){
+            console.log("Currency value is: "+this.currency.value);
+            return false;
+            });
+          });
+    </script>
+  </head>
+<style type="text/css">
+    .validation-advice {
+position: static;
+    display: inline-block;
+    border-width: 1px;
+    padding: 2px 5px 1px 6px;
+}
+</style>
+<div class="account-create">
+    <div class="page-title">
+        <h1><?php echo $this->__('Konfiirmasi Pembayaran') ?></h1>
+    </div>
+
+<?php echo $this->getChildHtml('form_fields_before')?>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php /* Extensions placeholder */ ?>
+
+<div class="awbali_formwrapper">
+	<form method="post" name="konfirmasipembayaranform" id="konfirmasipembayaranform" action="<?php echo Mage::getBaseUrl();?>konfirmasipembayaran/index/post">
+    	<div class="page-title">
+        <h3><?php echo $this->__('Data Order') ?></h3>
+    </div>
+            <ul class="form-list">
+
+ 
+       <li class="fields">
+        <div class="field">
+            <label class="required"> No.Order<em>*</em></label>
+            <div class="input-box">
+                <input type="text" class="input-text required-noorder validate-noorder" name="noorder" placeholder="No order pesanan anda" />
+            </div>
+         <div class="field">    
+        </li>
+            
+
+          
+
+        <li class="fields">
+        <div class="field">
+            <label class="required">Jumlah Transfer<em>*</em></label>
+            <div class="input-box">
+            <input type="currency"   class="input-text required-jumlahtransfer" name="jumlahtransfer" placeholder="Tuliskan jumlah dana yang di transfer"/>
+             </div>
+         <div class="field">    
+        </li>
+       
+       <br>
+       <div class="page-title">
+        <h3><?php echo $this->__('Data Pengirim') ?></h3>
+    </div>
+            <ul class="form-list">
+
+        <li class="fields">
+        <div class="field">
+            <label class="required">Nama<em>*</em></label>
+            <div class="input-box">
+            <input type="text" class="input-text required-namapengirim" name="nama" placeholder="Nama yang tertera pada buku bank"/> 
+            </div>
+        
+             
+        </li>
+
+        
+        <li class="fields">
+        <div class="field">
+            <label class="required">Email<em>*</em></label>
+            <div class="input-box">
+            <input type="text" class="input-text required-emailpengirim validate-email" name="email" placeholder="Masukan email, contoh : email@example.com" />
+            </div>
+            </div>
+            </li>
+        
+        <!-- <div class="awbali_formcontent">
+            <label>Nama Bank Pengirim<em>*</em></label>
+            <input type="text" class="awbali_input required-entry" name="bankbuyer" />
+            <div class="clear"></div>
+        </div> -->
+ <li class="fields">
+         <div class="field">
+            <label class="required">Nama Bank Pengirim<em>*</em></label>
+            <div class "input-box">   
+            <input type="text" class="input-text required-namabankpengirim" name="bankbuyer"placeholder="Nama Bank Pengirim" />
+            </div>
+            </div>
+            </li>
+
+        <li class="fields">
+         <div class="field">
+            <label class="required">No. Rekening Pengirim<em>*</em></label>
+            <div class "input-box">   
+            <input type="text" class="input-text required-norekpengirim" name="rekbuyer"placeholder="Nomor rekening anda" />
+            </div>
+            </div>
+            </li>
+        <br>
+        <br>
+        <div >
+        <div class="page-title">
+        <h3><?php echo $this->__('Data Transfer') ?></h3>
+    </div>
+            <ul class="form-list">
+        
+       <li class="fields">
+           <div class="field">
+            <label class="required">Bank Tujuan<em>*</em></label>
+            <select name="banktujuan" class="selectaddr.button validate-select">
+                <option value="">Pilih Bank Tujuan</option>
+                <option value="BCA">BCA PT. IDMARCO No. Rek 111-111-1111</option>
+                <option value="Mandiri">Mandiri PT. IDMARCO  No. Rek 123-1233-1231-123</option>
+                <option value="BRI">BRI PT. IDMARCO No. Rek 1231-1231-1231</option>
+                <option value="CIMB NIAGA">CIMB NIAGA PT. IDMARCO No. Rek 1312-1231-1231</option>
+                <option value="BNI">BNI PT. IDMARCO No. Rek 1421-1231-1231</option>
+            </select>
+            </div>
+            </li>
+        <li class="fields">
+        <div class="field">
+            <label class="required">Metode Transfer<em>*</em></label>
+            <select name="metodetransfer" class="selectaddr.button validate-select">
+            	<option value="">Pilih Metode Transfer</option>
+                <option value="Setoran Tunai">Setoran Tunai</option>
+                <option value="ATM">ATM</option>
+                <option value="Internet Banking">Internet Banking</option>
+                <option value="SMS Banking">SMS Banking</option>
+            </select>
+            </div>
+           </li>
+
+       <li class="fields">
+       <div class="field">
+            <label class="required">Tanggal Transfer<em>*</em></label>
+            <input type="date" class="input-text required-entry" name="tanggaltransfer" placeholder="DD-MM-YYYY" />
+            </div>
+
+         <!--  </li>
+  <li class="fields">
+        <div class="field">
+            <label class="required"> Coba Tambah<em>*</em></label>
+            <div class="input-box">
+                <input type="text" class="input-text required-entry " name="cobatambah" placeholder="Coba Tambah" />
+            </div>
+         <div class="field">    
+        </li>
+                  
+                  <li class="fields">
+                  <div class="field">
+            <label >Bukti Transaksi</label>
+            <li>
+
+            <input type="file" name="customerimg"  value="" class="btn" />
+            </li>
+        </div>
+
+          </li> -->
+
+
+        <li class="fields">
+       <div class="field">
+        <input type="submit" value="Konfirmasi" class="btn" />
+        </div>
+        </li>
+</div>
+</div>
+
+
+    </form>
+</div>
+
+<script type="text/javascript">
+    //< ![CDATA[
+        var customForm = new VarienForm('konfirmasipembayaranform');
+    //]]>
+</script>
